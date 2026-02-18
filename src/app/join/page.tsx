@@ -53,12 +53,27 @@ export default function JoinPage() {
                             </div>
 
                             <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.2 }}
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{ once: true, margin: "-100px" }}
+                                variants={{
+                                    hidden: { opacity: 0 },
+                                    show: {
+                                        opacity: 1,
+                                        transition: {
+                                            staggerChildren: 0.15
+                                        }
+                                    }
+                                }}
                                 className="space-y-6"
                             >
-                                <div className="flex gap-4 p-5 rounded-2xl dark:bg-white/5 bg-neutral-50 border dark:border-white/10 border-neutral-200 dark:hover:border-pink-500/30 hover:border-pink-500/30 transition-colors group">
+                                <motion.div
+                                    variants={{
+                                        hidden: { opacity: 0, x: -20 },
+                                        show: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+                                    }}
+                                    className="flex gap-4 p-5 rounded-2xl dark:bg-white/5 bg-neutral-50 border dark:border-white/10 border-neutral-200 dark:hover:border-pink-500/30 hover:border-pink-500/30 transition-colors group"
+                                >
                                     <div className="p-3 bg-pink-500/10 rounded-xl text-pink-500 group-hover:scale-110 transition-transform">
                                         <Heart size={24} />
                                     </div>
@@ -66,9 +81,15 @@ export default function JoinPage() {
                                         <h3 className="dark:text-white text-neutral-900 font-bold mb-1">Passionate Community</h3>
                                         <p className="text-sm dark:text-neutral-400 text-neutral-500">Join 120+ members who share the same values and drive.</p>
                                     </div>
-                                </div>
+                                </motion.div>
 
-                                <div className="flex gap-4 p-5 rounded-2xl dark:bg-white/5 bg-neutral-50 border dark:border-white/10 border-neutral-200 dark:hover:border-purple-500/30 hover:border-purple-500/30 transition-colors group">
+                                <motion.div
+                                    variants={{
+                                        hidden: { opacity: 0, x: -20 },
+                                        show: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+                                    }}
+                                    className="flex gap-4 p-5 rounded-2xl dark:bg-white/5 bg-neutral-50 border dark:border-white/10 border-neutral-200 dark:hover:border-purple-500/30 hover:border-purple-500/30 transition-colors group"
+                                >
                                     <div className="p-3 bg-purple-500/10 rounded-xl text-purple-500 group-hover:scale-110 transition-transform">
                                         <Sparkles size={24} />
                                     </div>
@@ -76,9 +97,15 @@ export default function JoinPage() {
                                         <h3 className="dark:text-white text-neutral-900 font-bold mb-1">Personal Growth</h3>
                                         <p className="text-sm dark:text-neutral-400 text-neutral-500">Workshops and trainings to help you become a better leader.</p>
                                     </div>
-                                </div>
+                                </motion.div>
 
-                                <div className="flex gap-4 p-5 rounded-2xl dark:bg-white/5 bg-neutral-50 border dark:border-white/10 border-neutral-200 dark:hover:border-blue-500/30 hover:border-blue-500/30 transition-colors group">
+                                <motion.div
+                                    variants={{
+                                        hidden: { opacity: 0, x: -20 },
+                                        show: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+                                    }}
+                                    className="flex gap-4 p-5 rounded-2xl dark:bg-white/5 bg-neutral-50 border dark:border-white/10 border-neutral-200 dark:hover:border-blue-500/30 hover:border-blue-500/30 transition-colors group"
+                                >
                                     <div className="p-3 bg-blue-500/10 rounded-xl text-blue-500 group-hover:scale-110 transition-transform">
                                         <ShieldCheck size={24} />
                                     </div>
@@ -86,7 +113,7 @@ export default function JoinPage() {
                                         <h3 className="dark:text-white text-neutral-900 font-bold mb-1">Meaningful Impact</h3>
                                         <p className="text-sm dark:text-neutral-400 text-neutral-500">Participate in projects that actually help Menzel Bourguiba.</p>
                                     </div>
-                                </div>
+                                </motion.div>
                             </motion.div>
 
                             <div className="pt-8">
@@ -104,9 +131,10 @@ export default function JoinPage() {
 
                         {/* Right Side: Large Form */}
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.3 }}
+                            initial={{ opacity: 0, x: 30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
                             className="dark:bg-[#0a0a0a] bg-white dark:border-white/10 border-neutral-200 border rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden"
                         >
                             <div className="absolute top-0 right-0 w-64 h-64 bg-pink-500/10 blur-[80px] rounded-full pointer-events-none"></div>
