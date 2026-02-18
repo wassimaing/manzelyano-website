@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export function Navbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -24,8 +25,10 @@ export function Navbar() {
         <header
             id="main-header"
             className={cn(
-                "fixed top-6 left-1/2 -translate-x-1/2 h-16 md:h-20 rounded-full z-50 flex items-center justify-center glass-pill px-4 transition-all duration-700 w-[95%] max-w-[800px] shadow-2xl shadow-black/50 backdrop-blur-sm",
-                scrolled ? "bg-black/80 border-white/20" : ""
+                "fixed top-6 left-1/2 -translate-x-1/2 h-16 md:h-20 rounded-full z-50 flex items-center justify-center px-4 transition-all duration-700 w-[95%] max-w-[800px] shadow-2xl backdrop-blur-sm",
+                "dark:shadow-black/50 shadow-neutral-300/50",
+                "glass-pill",
+                scrolled ? "dark:bg-black/80 bg-white/80 dark:border-white/20 border-neutral-300" : ""
             )}
         >
             <div className="flex items-center justify-between w-full relative overflow-x-auto no-scrollbar md:overflow-visible md:justify-center px-2">
@@ -35,13 +38,13 @@ export function Navbar() {
                 >
                     <Link
                         href="/about"
-                        className="px-3 md:px-5 py-2 rounded-full text-sm md:text-base font-medium text-neutral-300 hover:text-white hover:bg-white/5 transition-colors cursor-pointer header-link whitespace-nowrap"
+                        className="px-3 md:px-5 py-2 rounded-full text-sm md:text-base font-medium dark:text-neutral-300 text-neutral-600 dark:hover:text-white hover:text-neutral-900 dark:hover:bg-white/5 hover:bg-black/5 transition-colors cursor-pointer header-link whitespace-nowrap"
                     >
                         About
                     </Link>
                     <Link
                         href="/events"
-                        className="px-3 md:px-5 py-2 rounded-full text-sm md:text-base font-medium text-neutral-300 hover:text-white hover:bg-white/5 transition-colors cursor-pointer header-link whitespace-nowrap"
+                        className="px-3 md:px-5 py-2 rounded-full text-sm md:text-base font-medium dark:text-neutral-300 text-neutral-600 dark:hover:text-white hover:text-neutral-900 dark:hover:bg-white/5 hover:bg-black/5 transition-colors cursor-pointer header-link whitespace-nowrap"
                     >
                         Events
                     </Link>
@@ -66,18 +69,20 @@ export function Navbar() {
                 >
                     <Link
                         href="/#team"
-                        className="px-3 md:px-5 py-2 rounded-full text-sm md:text-base font-medium text-neutral-300 hover:text-white hover:bg-white/5 transition-colors cursor-pointer header-link whitespace-nowrap"
+                        className="px-3 md:px-5 py-2 rounded-full text-sm md:text-base font-medium dark:text-neutral-300 text-neutral-600 dark:hover:text-white hover:text-neutral-900 dark:hover:bg-white/5 hover:bg-black/5 transition-colors cursor-pointer header-link whitespace-nowrap"
                     >
                         Team
                     </Link>
                     <Link
                         href="/join"
-                        className="px-3 md:px-5 py-2 rounded-full text-sm md:text-base font-semibold text-pink-400 hover:text-white hover:bg-pink-500/20 transition-colors cursor-pointer header-link whitespace-nowrap"
+                        className="px-3 md:px-5 py-2 rounded-full text-sm md:text-base font-semibold text-pink-400 dark:hover:text-white hover:text-pink-600 dark:hover:bg-pink-500/20 hover:bg-pink-500/10 transition-colors cursor-pointer header-link whitespace-nowrap"
                     >
                         Join
                     </Link>
+                    <ThemeToggle />
                 </div>
             </div>
         </header>
     );
 }
+
