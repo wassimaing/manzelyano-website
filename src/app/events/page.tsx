@@ -1,15 +1,14 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { events } from "@/data/events";
-import { Calendar, MapPin, ArrowUpRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { getEvents } from "@/lib/data";
+import { MapPin, ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
-export default function EventsPage() {
+export default async function EventsPage() {
+    const events = await getEvents();
+
     return (
         <>
             <Navbar />

@@ -2,10 +2,16 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
-import { testimonials } from "@/data/testimonials";
+import { testimonials as mockTestimonials, Testimonial } from "@/data/testimonials";
 import { Quote } from "lucide-react";
 
-export function Testimonials() {
+interface TestimonialsProps {
+    initialTestimonials?: Testimonial[];
+}
+
+export function Testimonials({ initialTestimonials }: TestimonialsProps) {
+    const data = initialTestimonials && initialTestimonials.length > 0 ? initialTestimonials : mockTestimonials;
+
     return (
         <section className="relative w-full py-20 overflow-hidden bg-black z-20">
             {/* Background Decorations */}
@@ -31,7 +37,7 @@ export function Testimonials() {
                 <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none"></div>
 
                 <div className="flex gap-6 animate-marquee hover:[animation-play-state:paused] w-max px-4">
-                    {[...testimonials, ...testimonials].map((item, index) => (
+                    {[...data, ...data].map((item, index) => (
                         <div
                             key={index}
                             className="w-[300px] md:w-[400px] bg-neutral-900/50 border border-white/5 rounded-2xl p-8 backdrop-blur-sm hover:bg-neutral-800/50 transition-colors shrink-0 flex flex-col relative"

@@ -6,17 +6,24 @@ import { Events } from "@/components/home/Events";
 import { Team } from "@/components/home/Team";
 import { Join } from "@/components/home/Join";
 import { Footer } from "@/components/layout/Footer";
+import { getTestimonials, getEvents, getDepartments } from "@/lib/data";
 
-export default function Home() {
+export default async function Home() {
+  const [testimonials, events, departments] = await Promise.all([
+    getTestimonials(),
+    getEvents(),
+    getDepartments(),
+  ]);
+
   return (
     <>
       <Navbar />
       <main className="w-full flex flex-col items-center relative z-10">
-        <Hero />
+        <Hero initialEventsCount={events.length} />
         <About />
-        <Events />
-        <Team />
-        <Testimonials />
+        <Events initialEvents={events} />
+        <Team initialDepartments={departments} />
+        <Testimonials initialTestimonials={testimonials} />
         <Join />
       </main>
       <Footer />

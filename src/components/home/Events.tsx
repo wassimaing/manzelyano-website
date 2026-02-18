@@ -3,11 +3,18 @@
 import React from "react";
 import { ArrowRight, Calendar, MapPin, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { events } from "@/data/events";
+import { events as mockEvents, Event } from "@/data/events";
 import Link from "next/link";
 
-export function Events() {
-    const featuredEvent = events[0];
+interface EventsProps {
+    initialEvents?: Event[];
+}
+
+export function Events({ initialEvents }: EventsProps) {
+    const data = initialEvents && initialEvents.length > 0 ? initialEvents : mockEvents;
+    const featuredEvent = data[0];
+
+    if (!featuredEvent) return null;
 
     return (
         <section id="events" className="relative w-full py-16 md:py-24 px-4 md:px-8 z-20">
@@ -95,7 +102,7 @@ export function Events() {
                         <div className="absolute right-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
 
                         <div className="flex gap-4 animate-marquee hover:[animation-play-state:paused] items-center px-4">
-                            {events.map((event, index) => (
+                            {data.map((event, index) => (
                                 <Link key={index} href={`/events/${event.id}`} className="shrink-0">
                                     <div
                                         className={cn(
