@@ -4,6 +4,16 @@ import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
 import { useEffect, useState } from "react";
 
+declare global {
+    interface Document {
+        startViewTransition(callback: () => void | Promise<void>): {
+            ready: Promise<void>;
+            finished: Promise<void>;
+            updateCallbackDone: Promise<void>;
+        };
+    }
+}
+
 export function ThemeToggle() {
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
@@ -16,9 +26,21 @@ export function ThemeToggle() {
         );
     }
 
+    const toggleTheme = () => {
+        // Fallback for browsers that don't support View Transitions
+        if (!document.startViewTransition) {
+            setTheme(theme === "dark" ? "light" : "dark");
+            return;
+        }
+
+        document.startViewTransition(() => {
+            setTheme(theme === "dark" ? "light" : "dark");
+        });
+    };
+
     return (
         <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={toggleTheme}
             className="p-2 rounded-full bg-white/10 dark:bg-white/10 border border-neutral-300 dark:border-white/10 hover:bg-white/20 dark:hover:bg-white/20 transition-all duration-300 cursor-pointer"
             aria-label="Toggle theme"
         >

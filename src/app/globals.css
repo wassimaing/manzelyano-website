@@ -60,6 +60,8 @@
   --animate-pulse-glow: pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-blob: blob 7s infinite;
 
+  --expo-in: cubic-bezier(0.7, 0, 0.84, 0);
+
   @keyframes marquee {
     0% {
       transform: translateX(0%);
@@ -304,5 +306,40 @@
     /* IE and Edge */
     scrollbar-width: none;
     /* Firefox */
+  }
+
+  /* View Transition API - Theme Toggle Animation */
+  ::view-transition-group(root) {
+    animation-timing-function: var(--expo-in);
+  }
+
+  ::view-transition-new(root) {
+    mask: url('/images/logo-gif.gif') center / 0 no-repeat;
+    animation: scale-mask 1.5s;
+    animation-fill-mode: both;
+  }
+
+  ::view-transition-old(root),
+  .dark::view-transition-old(root) {
+    animation: scale-mask 1.5s;
+    animation-fill-mode: both;
+  }
+
+  @keyframes scale-mask {
+    0% {
+      mask-size: 0;
+    }
+
+    10% {
+      mask-size: 20vmax;
+    }
+
+    90% {
+      mask-size: 50vmax;
+    }
+
+    100% {
+      mask-size: 2000vmax;
+    }
   }
 }
