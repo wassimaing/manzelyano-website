@@ -267,8 +267,8 @@ export function Hero() {
                 className="relative w-full min-h-screen md:h-[130vh] overflow-hidden flex flex-col items-center justify-center pt-20 perspective-container"
             >
                 {/* Vignette & Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-[#020202] z-[2] pointer-events-none"></div>
-                <div className="absolute inset-0 bg-radial-gradient from-transparent via-black/20 to-black z-[1] pointer-events-none mix-blend-multiply"></div>
+                <div className="absolute inset-0 dark:bg-gradient-to-b dark:from-black/40 dark:via-black/30 dark:to-[#020202] bg-gradient-to-b from-white/40 via-white/30 to-neutral-50 z-[2] pointer-events-none"></div>
+                <div className="absolute inset-0 bg-radial-gradient from-transparent dark:via-black/20 via-white/20 dark:to-black to-white z-[1] pointer-events-none mix-blend-multiply"></div>
 
                 {/* Ambient Glow Blobs */}
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob z-[2]"></div>
@@ -301,14 +301,14 @@ export function Hero() {
                         className="relative mb-8 hero-layer z-30"
                         style={{ transform: "translateZ(80px)" }}
                     >
-                        <h1 className="font-display font-bold text-[12vw] md:text-[140px] leading-[0.85] tracking-tighter text-white drop-shadow-2xl">
+                        <h1 className="font-display font-bold text-[12vw] md:text-[140px] leading-[0.85] tracking-tighter dark:text-white text-neutral-900 drop-shadow-2xl">
                             <span
                                 ref={title1Ref}
-                                className="block scramble-text text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-pink-300 drop-shadow-lg"
+                                className="block scramble-text text-transparent bg-clip-text dark:bg-gradient-to-br dark:from-white dark:via-white dark:to-pink-300 bg-gradient-to-br from-neutral-900 via-neutral-800 to-pink-600 drop-shadow-lg"
                             ></span>
 
                         </h1>
-                        <p className="font-display font-semibold text-2xl md:text-4xl tracking-[0.2em] text-white mt-4 uppercase glow-text-pink opacity-90">
+                        <p className="font-display font-semibold text-2xl md:text-4xl tracking-[0.2em] dark:text-white text-neutral-900 mt-4 uppercase glow-text-pink opacity-90">
                             Bosco Youth
                         </p>
                     </div>
@@ -318,8 +318,8 @@ export function Hero() {
                         className="relative max-w-2xl mx-auto hero-layer z-30 mt-2"
                         style={{ transform: "translateZ(40px)" }}
                     >
-                        <div className="absolute inset-0 bg-black/40 blur-xl -z-10 rounded-full"></div>
-                        <p className="font-sans text-base md:text-xl text-neutral-200 leading-relaxed opacity-0 animate-[fadeInUp_1s_ease-out_1.2s_forwards] drop-shadow-md">
+                        <div className="absolute inset-0 dark:bg-black/40 bg-white/40 blur-xl -z-10 rounded-full"></div>
+                        <p className="font-sans text-base md:text-xl dark:text-neutral-200 text-neutral-700 leading-relaxed opacity-0 animate-[fadeInUp_1s_ease-out_1.2s_forwards] drop-shadow-md">
                             Empowering Youth in{" "}
                             <span className="text-pink-400 font-semibold">
                                 Menzel Bourguiba
@@ -334,7 +334,7 @@ export function Hero() {
                         style={{ transform: "translateZ(70px)" }}
                     >
                         <Link href="/join">
-                            <button className="group relative px-8 py-4 bg-white text-black rounded-full text-sm font-bold hover:bg-pink-50 transition-all hover:scale-105 active:scale-95 overflow-hidden shadow-[0_0_30px_rgba(236,72,153,0.4)] ring-2 ring-white">
+                            <button className="group relative px-8 py-4 dark:bg-white dark:text-black bg-neutral-900 text-white rounded-full text-sm font-bold dark:hover:bg-pink-50 hover:bg-neutral-800 transition-all hover:scale-105 active:scale-95 overflow-hidden dark:shadow-[0_0_30px_rgba(236,72,153,0.4)] shadow-[0_0_30px_rgba(236,72,153,0.3)] dark:ring-2 dark:ring-white ring-2 ring-neutral-900">
                                 <span className="relative z-10 flex items-center justify-center gap-2">
                                     Join Our Family
                                     <ArrowRight
@@ -344,7 +344,7 @@ export function Hero() {
                                 </span>
                             </button>
                         </Link>
-                        <button className="px-8 py-4 bg-white/5 border border-white/10 text-white rounded-full text-sm font-semibold hover:bg-white/10 transition-all hover:border-pink-500/50 backdrop-blur-md flex items-center justify-center gap-2">
+                        <button className="px-8 py-4 dark:bg-white/5 bg-black/5 dark:border-white/10 border-neutral-300 border dark:text-white text-neutral-900 rounded-full text-sm font-semibold dark:hover:bg-white/10 hover:bg-black/10 transition-all dark:hover:border-pink-500/50 hover:border-pink-500/50 backdrop-blur-md flex items-center justify-center gap-2">
                             <Calendar size={20} className="text-purple-400" />
                             Our Activities
                         </button>
@@ -358,16 +358,16 @@ export function Hero() {
                         className="absolute left-[8%] top-[15%] hidden xl:block hero-layer"
                         style={{ transform: "translateZ(50px) rotateY(5deg)" }}
                     >
-                        <div className="bg-[#0a0a0a]/90 backdrop-blur-md border border-white/10 p-5 rounded-2xl w-52 shadow-2xl transform hover:scale-105 transition-transform duration-500">
-                            <div className="flex items-center gap-2 mb-3 text-[10px] font-bold text-neutral-400 tracking-widest uppercase">
+                        <div className="dark:bg-[#0a0a0a]/90 bg-white/90 backdrop-blur-md dark:border-white/10 border-neutral-200 border p-5 rounded-2xl w-52 shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                            <div className="flex items-center gap-2 mb-3 text-[10px] font-bold dark:text-neutral-400 text-neutral-500 tracking-widest uppercase">
                                 <Users size={14} className="text-purple-400" />
                                 Community
                             </div>
                             <div className="flex items-baseline gap-2">
-                                <span className="text-3xl font-display font-bold text-white tracking-tighter">120+</span>
+                                <span className="text-3xl font-display font-bold dark:text-white text-neutral-900 tracking-tighter">120+</span>
                                 <div className="flex items-center gap-1 text-[10px] text-green-400 font-bold bg-green-500/10 px-2 py-0.5 rounded-full">+15%</div>
                             </div>
-                            <p className="text-[11px] text-neutral-500 font-bold mt-1 uppercase tracking-wider">Active Members</p>
+                            <p className="text-[11px] dark:text-neutral-500 text-neutral-400 font-bold mt-1 uppercase tracking-wider">Active Members</p>
                         </div>
                     </div>
 
@@ -376,18 +376,18 @@ export function Hero() {
                         className="absolute right-[8%] top-[20%] hidden xl:block hero-layer"
                         style={{ transform: "translateZ(65px) rotateY(-5deg)" }}
                     >
-                        <div className="bg-[#0a0a0a]/90 backdrop-blur-md border border-white/10 p-5 rounded-2xl w-52 shadow-2xl transform hover:scale-105 transition-transform duration-500">
-                            <div className="flex items-center gap-2 mb-3 text-[10px] font-bold text-neutral-400 tracking-widest uppercase">
+                        <div className="dark:bg-[#0a0a0a]/90 bg-white/90 backdrop-blur-md dark:border-white/10 border-neutral-200 border p-5 rounded-2xl w-52 shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                            <div className="flex items-center gap-2 mb-3 text-[10px] font-bold dark:text-neutral-400 text-neutral-500 tracking-widest uppercase">
                                 <Award size={14} className="text-pink-400" />
                                 Achievement
                             </div>
                             <div className="flex items-baseline gap-2">
-                                <span className="text-5xl font-display font-bold text-white tracking-tighter">
+                                <span className="text-5xl font-display font-bold dark:text-white text-neutral-900 tracking-tighter">
                                     <Counter from={0} to={events.length} />
                                 </span>
                                 <span className="text-[10px] text-pink-500 font-bold px-2 py-0.5 bg-pink-500/10 rounded-full">DONE</span>
                             </div>
-                            <p className="text-[11px] text-neutral-500 font-bold mt-1 uppercase tracking-wider">Events Done</p>
+                            <p className="text-[11px] dark:text-neutral-500 text-neutral-400 font-bold mt-1 uppercase tracking-wider">Events Done</p>
                         </div>
                     </div>
 
@@ -396,12 +396,12 @@ export function Hero() {
                         className="absolute left-[5%] top-[45%] hidden xl:block hero-layer"
                         style={{ transform: "translateZ(40px) rotateY(12deg)" }}
                     >
-                        <div className="bg-[#0a0a0a]/90 backdrop-blur-md border border-white/10 p-4 rounded-xl w-48 shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                        <div className="dark:bg-[#0a0a0a]/90 bg-white/90 backdrop-blur-md dark:border-white/10 border-neutral-200 border p-4 rounded-xl w-48 shadow-2xl transform hover:scale-105 transition-transform duration-500">
                             <div className="flex items-center gap-4">
                                 <div className="p-2.5 bg-pink-500/20 rounded-xl text-pink-400 shadow-lg shadow-pink-500/10">
                                     <Sparkles size={18} />
                                 </div>
-                                <span className="text-[11px] font-bold text-white tracking-[0.25em]">WORKSHOPS</span>
+                                <span className="text-[11px] font-bold dark:text-white text-neutral-900 tracking-[0.25em]">WORKSHOPS</span>
                             </div>
                         </div>
                     </div>
@@ -411,12 +411,12 @@ export function Hero() {
                         className="absolute right-[5%] top-[50%] hidden xl:block hero-layer"
                         style={{ transform: "translateZ(75px) rotateY(-12deg)" }}
                     >
-                        <div className="bg-[#0a0a0a]/90 backdrop-blur-md border border-white/10 p-4 rounded-xl w-48 shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                        <div className="dark:bg-[#0a0a0a]/90 bg-white/90 backdrop-blur-md dark:border-white/10 border-neutral-200 border p-4 rounded-xl w-48 shadow-2xl transform hover:scale-105 transition-transform duration-500">
                             <div className="flex items-center gap-4">
                                 <div className="p-2.5 bg-purple-500/20 rounded-xl text-purple-400 shadow-lg shadow-purple-500/10">
                                     <Tent size={18} />
                                 </div>
-                                <span className="text-[11px] font-bold text-white tracking-[0.25em]">SUMMERCAMPS</span>
+                                <span className="text-[11px] font-bold dark:text-white text-neutral-900 tracking-[0.25em]">SUMMERCAMPS</span>
                             </div>
                         </div>
                     </div>
@@ -426,12 +426,12 @@ export function Hero() {
                         className="absolute left-[10%] bottom-[15%] hidden xl:block hero-layer"
                         style={{ transform: "translateZ(35px) rotateY(8deg)" }}
                     >
-                        <div className="bg-[#0a0a0a]/90 backdrop-blur-md border border-white/10 p-4 rounded-xl w-48 shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                        <div className="dark:bg-[#0a0a0a]/90 bg-white/90 backdrop-blur-md dark:border-white/10 border-neutral-200 border p-4 rounded-xl w-48 shadow-2xl transform hover:scale-105 transition-transform duration-500">
                             <div className="flex items-center gap-4">
                                 <div className="p-2.5 bg-blue-500/20 rounded-xl text-blue-400 shadow-lg shadow-blue-500/10">
                                     <MessagesSquare size={18} />
                                 </div>
-                                <span className="text-[11px] font-bold text-white tracking-[0.25em]">MEETINGS</span>
+                                <span className="text-[11px] font-bold dark:text-white text-neutral-900 tracking-[0.25em]">MEETINGS</span>
                             </div>
                         </div>
                     </div>
@@ -441,12 +441,12 @@ export function Hero() {
                         className="absolute right-[12%] bottom-[18%] hidden xl:block hero-layer"
                         style={{ transform: "translateZ(55px) rotateY(-8deg)" }}
                     >
-                        <div className="bg-[#0a0a0a]/90 backdrop-blur-md border border-white/10 p-4 rounded-xl w-48 shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                        <div className="dark:bg-[#0a0a0a]/90 bg-white/90 backdrop-blur-md dark:border-white/10 border-neutral-200 border p-4 rounded-xl w-48 shadow-2xl transform hover:scale-105 transition-transform duration-500">
                             <div className="flex items-center gap-4">
                                 <div className="p-2.5 bg-yellow-500/20 rounded-xl text-yellow-400 shadow-lg shadow-yellow-500/10">
                                     <Bus size={18} />
                                 </div>
-                                <span className="text-[11px] font-bold text-white tracking-[0.25em]">TRIPS</span>
+                                <span className="text-[11px] font-bold dark:text-white text-neutral-900 tracking-[0.25em]">TRIPS</span>
                             </div>
                         </div>
                     </div>
@@ -467,4 +467,5 @@ export function Hero() {
             </section>
         </>
     );
+
 }

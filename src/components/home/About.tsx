@@ -14,7 +14,7 @@ export function About() {
                         <span className="text-sm font-mono text-pink-500 uppercase tracking-widest mb-3 flex items-center gap-2">
                             <span className="w-8 h-[1px] bg-pink-500"></span> Our Mission
                         </span>
-                        <h2 className="font-display text-5xl md:text-7xl font-bold tracking-tight text-white leading-[0.95]">
+                        <h2 className="font-display text-5xl md:text-7xl font-bold tracking-tight dark:text-white text-neutral-900 leading-[0.95]">
                             Building Tomorrow's <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
                                 Leaders Today.
@@ -24,10 +24,10 @@ export function About() {
 
                     <div className="space-y-8">
                         <div className="reveal-text reveal-visible delay-100 pl-6 border-l-2 border-pink-500/30">
-                            <h3 className="text-2xl font-semibold text-white mb-3 flex items-center gap-2">
+                            <h3 className="text-2xl font-semibold dark:text-white text-neutral-900 mb-3 flex items-center gap-2">
                                 <ShieldCheck className="text-pink-500" size={24} /> Youth Empowerment
                             </h3>
-                            <p className="text-neutral-300 leading-relaxed text-base md:text-lg">
+                            <p className="dark:text-neutral-300 text-neutral-600 leading-relaxed text-base md:text-lg">
                                 Located in Menzel Bourguiba, we foster a spirit of initiative and
                                 responsibility. We believe every individual holds the potential to
                                 lead and inspire change.
@@ -35,10 +35,10 @@ export function About() {
                         </div>
 
                         <div className="reveal-text reveal-visible delay-200 pl-6 border-l-2 border-purple-500/30">
-                            <h3 className="text-2xl font-semibold text-white mb-3 flex items-center gap-2">
+                            <h3 className="text-2xl font-semibold dark:text-white text-neutral-900 mb-3 flex items-center gap-2">
                                 <Heart className="text-purple-500" size={24} /> Community Service
                             </h3>
-                            <p className="text-neutral-300 leading-relaxed text-base md:text-lg">
+                            <p className="dark:text-neutral-300 text-neutral-600 leading-relaxed text-base md:text-lg">
                                 Through volunteering, charity drives, and educational support, we
                                 connect with our community. From environmental cleanups to
                                 cultural workshops.
@@ -48,7 +48,7 @@ export function About() {
                         <div className="reveal-text reveal-visible delay-300 pt-4">
                             <Link
                                 href="/about"
-                                className="inline-flex items-center gap-2 text-pink-500 font-bold hover:text-white transition-colors group"
+                                className="inline-flex items-center gap-2 text-pink-500 font-bold dark:hover:text-white hover:text-neutral-900 transition-colors group"
                             >
                                 Learn More About Us
                                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -66,13 +66,13 @@ export function About() {
                     />
 
                     {/* Overlay Info */}
-                    <div className="absolute bottom-6 left-6 right-6 p-6 bg-black/70 backdrop-blur-xl border border-white/10 rounded-2xl z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                    <div className="absolute bottom-6 left-6 right-6 p-6 dark:bg-black/70 bg-white/70 backdrop-blur-xl dark:border-white/10 border-neutral-200 border rounded-2xl z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform">
                         <div className="flex items-center gap-2 mb-3">
                             <div className="w-2 h-2 rounded-full bg-pink-500 shadow-[0_0_10px_#ec4899]"></div>
                             <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_10px_#9333ea]"></div>
-                            <div className="w-2 h-2 rounded-full bg-white"></div>
+                            <div className="w-2 h-2 rounded-full dark:bg-white bg-neutral-900"></div>
                         </div>
-                        <p className="font-mono text-xs text-pink-200 leading-relaxed">
+                        <p className="font-mono text-xs text-pink-200 dark:text-pink-200 leading-relaxed">
                             &gt; project: education_for_all<br />
                             &gt; status: active<br />
                             &gt; location: Rue Ibn Abi Dhief
@@ -83,3 +83,4 @@ export function About() {
         </section>
     );
 }
+

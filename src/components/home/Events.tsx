@@ -14,7 +14,7 @@ export function Events() {
             <div className="max-w-7xl mx-auto">
 
                 {/* Featured Event Card */}
-                <div className="relative w-full rounded-2xl bg-[#0a0a0a] border border-white/8 overflow-hidden mb-4 shadow-2xl shadow-black/50">
+                <div className="relative w-full rounded-2xl dark:bg-[#0a0a0a] bg-white dark:border-white/8 border-neutral-200 border overflow-hidden mb-4 shadow-2xl dark:shadow-black/50 shadow-neutral-200/50">
 
                     {/* Event Background Image (Blurry Ambient Effect) */}
                     <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
@@ -23,7 +23,7 @@ export function Events() {
                             alt=""
                             className="w-full h-full object-cover opacity-[0.75] blur-[4px] scale-150 rotate-3"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#0a0a0a]" />
+                        <div className="absolute inset-0 dark:bg-gradient-to-b dark:from-black/20 dark:via-transparent dark:to-[#0a0a0a] bg-gradient-to-b from-white/20 via-transparent to-white" />
                     </div>
 
                     {/* Ambient glow */}
@@ -46,14 +46,14 @@ export function Events() {
 
                             {/* Left: Title + description */}
                             <div>
-                                <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.05] mb-5">
+                                <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight dark:text-white text-neutral-900 leading-[1.05] mb-5">
                                     {featuredEvent.title}
                                 </h2>
-                                <p className="text-neutral-400 text-sm sm:text-base leading-relaxed max-w-xl line-clamp-3">
+                                <p className="dark:text-neutral-400 text-neutral-600 text-sm sm:text-base leading-relaxed max-w-xl line-clamp-3">
                                     {featuredEvent.overview}
                                 </p>
                                 {featuredEvent.location && (
-                                    <p className="mt-4 text-neutral-500 text-xs flex items-center gap-1.5">
+                                    <p className="mt-4 dark:text-neutral-500 text-neutral-400 text-xs flex items-center gap-1.5">
                                         <MapPin size={12} className="text-pink-500" />
                                         {featuredEvent.location}
                                     </p>
@@ -63,7 +63,7 @@ export function Events() {
                             {/* Right: Single CTA */}
                             <div className="w-full lg:w-auto">
                                 <Link href={`/events/${featuredEvent.id}`}>
-                                    <button className="group flex items-center justify-center gap-2.5 px-6 py-3.5 bg-white text-black rounded-xl font-semibold text-sm hover:bg-neutral-100 transition-all w-full shadow-[0_0_30px_rgba(255,255,255,0.15)] hover:shadow-[0_0_40px_rgba(255,255,255,0.25)] lg:min-w-[200px]">
+                                    <button className="group flex items-center justify-center gap-2.5 px-6 py-3.5 dark:bg-white dark:text-black bg-neutral-900 text-white rounded-xl font-semibold text-sm dark:hover:bg-neutral-100 hover:bg-neutral-800 transition-all w-full dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] shadow-lg lg:min-w-[200px]">
                                         View Details
                                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform text-pink-600" />
                                     </button>
@@ -74,15 +74,15 @@ export function Events() {
                 </div>
 
                 {/* Activity Calendar strip */}
-                <div className="relative w-full rounded-2xl bg-[#0a0a0a] border border-white/8 overflow-hidden">
+                <div className="relative w-full rounded-2xl dark:bg-[#0a0a0a] bg-white dark:border-white/8 border-neutral-200 border overflow-hidden">
 
                     {/* Calendar header */}
-                    <div className="flex items-center justify-between px-6 py-4 border-b border-white/5">
+                    <div className="flex items-center justify-between px-6 py-4 border-b dark:border-white/5 border-neutral-200">
                         <span className="text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-semibold flex items-center gap-2">
                             <Calendar size={13} className="text-neutral-400" />
                             Activity Calendar
                         </span>
-                        <Link href="/events" className="text-xs text-neutral-400 hover:text-white transition-colors flex items-center gap-1.5 group">
+                        <Link href="/events" className="text-xs dark:text-neutral-400 text-neutral-500 dark:hover:text-white hover:text-neutral-900 transition-colors flex items-center gap-1.5 group">
                             View all
                             <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                         </Link>
@@ -91,15 +91,15 @@ export function Events() {
                     {/* Marquee row */}
                     <div className="relative overflow-hidden py-5">
                         {/* Edge fade overlays */}
-                        <div className="absolute left-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-                        <div className="absolute right-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+                        <div className="absolute left-0 top-0 bottom-0 w-12 md:w-24 dark:bg-gradient-to-r dark:from-[#0a0a0a] dark:to-transparent bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+                        <div className="absolute right-0 top-0 bottom-0 w-12 md:w-24 dark:bg-gradient-to-l dark:from-[#0a0a0a] dark:to-transparent bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
                         <div className="flex gap-4 animate-marquee hover:[animation-play-state:paused] items-center px-4">
                             {events.map((event, index) => (
                                 <Link key={index} href={`/events/${event.id}`} className="shrink-0">
                                     <div
                                         className={cn(
-                                            "w-64 sm:w-72 p-5 bg-white/3 border border-white/6 rounded-xl flex flex-col justify-between hover:bg-white/6 transition-all cursor-pointer group/card relative overflow-hidden",
+                                            "w-64 sm:w-72 p-5 dark:bg-white/3 bg-neutral-50 border dark:border-white/6 border-neutral-200 rounded-xl flex flex-col justify-between dark:hover:bg-white/6 hover:bg-neutral-100 transition-all cursor-pointer group/card relative overflow-hidden",
                                             event.color === "pink" && "hover:border-pink-500/30",
                                             event.color === "purple" && "hover:border-purple-500/30",
                                             event.color === "blue" && "hover:border-blue-500/30",
@@ -124,7 +124,7 @@ export function Events() {
 
                                         <h4
                                             className={cn(
-                                                "text-white font-medium text-base leading-snug mb-2 line-clamp-2 transition-colors",
+                                                "dark:text-white text-neutral-900 font-medium text-base leading-snug mb-2 line-clamp-2 transition-colors",
                                                 event.color === "pink" && "group-hover/card:text-pink-200",
                                                 event.color === "purple" && "group-hover/card:text-purple-200",
                                                 event.color === "blue" && "group-hover/card:text-blue-200",
