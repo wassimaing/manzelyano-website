@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Users, ChevronRight } from "lucide-react";
 import { departments } from "@/data/team";
 
@@ -10,7 +11,13 @@ export function Team() {
 
     return (
         <section id="team" className="w-full max-w-[1200px] px-6 py-24 z-20 mx-auto">
-            <div className="flex flex-col items-center text-center mb-16 reveal-text reveal-visible">
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className="flex flex-col items-center text-center mb-16"
+            >
                 <span className="text-sm font-mono text-purple-400 uppercase tracking-widest mb-3 flex items-center gap-2">
                     <Users size={16} /> Leadership
                 </span>
@@ -20,12 +27,29 @@ export function Team() {
                 <p className="dark:text-neutral-400 text-neutral-600 max-w-2xl mx-auto text-lg leading-relaxed">
                     Meet the dedicated professionals leading our specialized departments and driving youth empowerment.
                 </p>
-            </div>
+            </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            <motion.div
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={{
+                    hidden: { opacity: 0 },
+                    show: {
+                        opacity: 1,
+                        transition: {
+                            staggerChildren: 0.1
+                        }
+                    }
+                }}
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+            >
                 {coos.map((member, index) => (
-                    <div
-                        key={index}
+                    <motion.div
+                        variants={{
+                            hidden: { opacity: 0, scale: 0.9 },
+                            show: { opacity: 1, scale: 1, transition: { duration: 0.5 } }
+                        }}
                         className="group relative"
                     >
                         <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-purple-500/5 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -44,11 +68,17 @@ export function Team() {
                                 {member.role}
                             </span>
                         </div>
-                    </div>
+                    </motion.div>
                 ))}
-            </div>
+            </motion.div>
 
-            <div className="flex justify-center mt-12">
+            <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="flex justify-center mt-12"
+            >
                 <Link
                     href="/about#departments"
                     className="group relative px-8 py-4 dark:bg-white/5 bg-neutral-100 dark:hover:bg-white/10 hover:bg-neutral-200 border dark:border-white/10 border-neutral-200 hover:border-pink-500/30 rounded-2xl transition-all duration-300 backdrop-blur-md overflow-hidden"
@@ -59,7 +89,7 @@ export function Team() {
                         <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform text-pink-500" />
                     </span>
                 </Link>
-            </div>
+            </motion.div>
         </section>
     );
 }

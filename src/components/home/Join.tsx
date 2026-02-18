@@ -2,6 +2,7 @@
 
 import React from "react";
 import { MessageCircle, Mail, Send } from "lucide-react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,14 +10,25 @@ import { Textarea } from "@/components/ui/textarea";
 export function Join() {
     return (
         <section id="join" className="w-full max-w-[1200px] px-6 py-32 z-20 mx-auto">
-            <div className="glass-panel rounded-[2.5rem] p-8 md:p-16 relative overflow-hidden shadow-2xl dark:shadow-pink-900/10 shadow-pink-200/30 dark:border-white/10 border-neutral-200 border">
+            <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className="glass-panel rounded-[2.5rem] p-8 md:p-16 relative overflow-hidden shadow-2xl dark:shadow-pink-900/10 shadow-pink-200/30 dark:border-white/10 border-neutral-200 border"
+            >
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
                 <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-purple-600/30 blur-[120px] rounded-full pointer-events-none"></div>
                 <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-pink-600/20 blur-[120px] rounded-full pointer-events-none"></div>
 
                 <div className="flex flex-col md:flex-row gap-16 relative z-10">
                     <div className="md:w-1/2 flex flex-col justify-center">
-                        <div className="reveal-text reveal-visible">
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                        >
                             <h2 className="font-display text-5xl md:text-7xl font-bold tracking-tight dark:text-white text-neutral-900 mb-6 leading-none">
                                 Become a <br />
                                 <span className="text-pink-500">Changemaker.</span>
@@ -36,10 +48,16 @@ export function Join() {
                                     </a>
                                 </Button>
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
 
-                    <div className="md:w-1/2 dark:bg-black/60 bg-white/60 dark:border-white/10 border-neutral-200 border rounded-3xl p-6 md:p-10 backdrop-blur-xl reveal-text reveal-visible delay-200 shadow-2xl">
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                        className="md:w-1/2 dark:bg-black/60 bg-white/60 dark:border-white/10 border-neutral-200 border rounded-3xl p-6 md:p-10 backdrop-blur-xl shadow-2xl"
+                    >
                         <form className="space-y-5">
                             <div className="space-y-1.5">
                                 <label className="text-[10px] uppercase tracking-wider dark:text-neutral-400 text-neutral-500 font-bold ml-1">
@@ -115,9 +133,9 @@ export function Join() {
                                 <Send className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
                             </Button>
                         </form>
-                    </div>
+                    </motion.div>
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 }

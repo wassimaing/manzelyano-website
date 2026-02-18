@@ -3,6 +3,7 @@
 import React from "react";
 import { ArrowRight, Calendar, MapPin, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import { events } from "@/data/events";
 import Link from "next/link";
 
@@ -14,7 +15,13 @@ export function Events() {
             <div className="max-w-7xl mx-auto">
 
                 {/* Featured Event Card */}
-                <div className="relative w-full rounded-2xl dark:bg-[#0a0a0a] bg-white dark:border-white/8 border-neutral-200 border overflow-hidden mb-4 shadow-2xl dark:shadow-black/50 shadow-neutral-200/50">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8 }}
+                    className="relative w-full rounded-2xl dark:bg-[#0a0a0a] bg-white dark:border-white/8 border-neutral-200 border overflow-hidden mb-4 shadow-2xl dark:shadow-black/50 shadow-neutral-200/50"
+                >
 
                     {/* Event Background Image (Blurry Ambient Effect) */}
                     <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
@@ -71,81 +78,96 @@ export function Events() {
                             </div>
                         </div>
                     </div>
+                </motion.div>
+            </div>
+
+            {/* Activity Calendar strip */}
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative w-full rounded-2xl dark:bg-[#0a0a0a] bg-white dark:border-white/8 border-neutral-200 border overflow-hidden"
+            >
+
+                {/* Calendar header */}
+                <div className="flex items-center justify-between px-6 py-4 border-b dark:border-white/5 border-neutral-200">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-semibold flex items-center gap-2">
+                        <Calendar size={13} className="text-neutral-400" />
+                        Activity Calendar
+                    </span>
+                    <Link href="/events" className="text-xs dark:text-neutral-400 text-neutral-500 dark:hover:text-white hover:text-neutral-900 transition-colors flex items-center gap-1.5 group">
+                        View all
+                        <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </Link>
                 </div>
 
-                {/* Activity Calendar strip */}
-                <div className="relative w-full rounded-2xl dark:bg-[#0a0a0a] bg-white dark:border-white/8 border-neutral-200 border overflow-hidden">
+                {/* Marquee row */}
+                <div className="relative overflow-hidden py-5">
+                    {/* Edge fade overlays */}
+                    <div className="absolute left-0 top-0 bottom-0 w-12 md:w-24 dark:bg-gradient-to-r dark:from-[#0a0a0a] dark:to-transparent bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-12 md:w-24 dark:bg-gradient-to-l dark:from-[#0a0a0a] dark:to-transparent bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
-                    {/* Calendar header */}
-                    <div className="flex items-center justify-between px-6 py-4 border-b dark:border-white/5 border-neutral-200">
-                        <span className="text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-semibold flex items-center gap-2">
-                            <Calendar size={13} className="text-neutral-400" />
-                            Activity Calendar
-                        </span>
-                        <Link href="/events" className="text-xs dark:text-neutral-400 text-neutral-500 dark:hover:text-white hover:text-neutral-900 transition-colors flex items-center gap-1.5 group">
-                            View all
-                            <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                        </Link>
-                    </div>
+                    <motion.div
+                        className="flex gap-4 items-center w-max"
+                        animate={{
+                            x: ["0%", "-25%"],
+                        }}
+                        transition={{
+                            duration: 20,
+                            ease: "linear",
+                            repeat: Infinity,
+                        }}
+                    >
+                        {[...events, ...events, ...events, ...events].map((event, index) => (
+                            <Link key={index} href={`/events/${event.id}`} className="shrink-0">
+                                <div
+                                    className={cn(
+                                        "w-64 sm:w-72 p-5 dark:bg-white/3 bg-neutral-50 border dark:border-white/6 border-neutral-200 rounded-xl flex flex-col justify-between dark:hover:bg-white/6 hover:bg-neutral-100 transition-all cursor-pointer group/card relative overflow-hidden",
+                                        event.color === "pink" && "hover:border-pink-500/30",
+                                        event.color === "purple" && "hover:border-purple-500/30",
+                                        event.color === "blue" && "hover:border-blue-500/30",
+                                        event.color === "yellow" && "hover:border-yellow-500/30"
+                                    )}
+                                >
+                                    <div className="absolute top-3 right-3 opacity-0 group-hover/card:opacity-100 transition-opacity">
+                                        <ArrowUpRight size={14} className="text-neutral-400" />
+                                    </div>
 
-                    {/* Marquee row */}
-                    <div className="relative overflow-hidden py-5">
-                        {/* Edge fade overlays */}
-                        <div className="absolute left-0 top-0 bottom-0 w-12 md:w-24 dark:bg-gradient-to-r dark:from-[#0a0a0a] dark:to-transparent bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-                        <div className="absolute right-0 top-0 bottom-0 w-12 md:w-24 dark:bg-gradient-to-l dark:from-[#0a0a0a] dark:to-transparent bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-
-                        <div className="flex gap-4 animate-marquee hover:[animation-play-state:paused] items-center px-4">
-                            {events.map((event, index) => (
-                                <Link key={index} href={`/events/${event.id}`} className="shrink-0">
-                                    <div
+                                    <span
                                         className={cn(
-                                            "w-64 sm:w-72 p-5 dark:bg-white/3 bg-neutral-50 border dark:border-white/6 border-neutral-200 rounded-xl flex flex-col justify-between dark:hover:bg-white/6 hover:bg-neutral-100 transition-all cursor-pointer group/card relative overflow-hidden",
-                                            event.color === "pink" && "hover:border-pink-500/30",
-                                            event.color === "purple" && "hover:border-purple-500/30",
-                                            event.color === "blue" && "hover:border-blue-500/30",
-                                            event.color === "yellow" && "hover:border-yellow-500/30"
+                                            "inline-block text-[10px] font-mono px-2 py-0.5 rounded border mb-3 w-fit",
+                                            event.color === "pink" && "text-pink-300 bg-pink-500/10 border-pink-500/20",
+                                            event.color === "purple" && "text-purple-300 bg-purple-500/10 border-purple-500/20",
+                                            event.color === "blue" && "text-blue-300 bg-blue-500/10 border-blue-500/20",
+                                            event.color === "yellow" && "text-yellow-300 bg-yellow-500/10 border-yellow-500/20"
                                         )}
                                     >
-                                        <div className="absolute top-3 right-3 opacity-0 group-hover/card:opacity-100 transition-opacity">
-                                            <ArrowUpRight size={14} className="text-neutral-400" />
-                                        </div>
+                                        {event.date}
+                                    </span>
 
-                                        <span
-                                            className={cn(
-                                                "inline-block text-[10px] font-mono px-2 py-0.5 rounded border mb-3 w-fit",
-                                                event.color === "pink" && "text-pink-300 bg-pink-500/10 border-pink-500/20",
-                                                event.color === "purple" && "text-purple-300 bg-purple-500/10 border-purple-500/20",
-                                                event.color === "blue" && "text-blue-300 bg-blue-500/10 border-blue-500/20",
-                                                event.color === "yellow" && "text-yellow-300 bg-yellow-500/10 border-yellow-500/20"
-                                            )}
-                                        >
-                                            {event.date}
-                                        </span>
+                                    <h4
+                                        className={cn(
+                                            "dark:text-white text-neutral-900 font-medium text-base leading-snug mb-2 line-clamp-2 transition-colors",
+                                            event.color === "pink" && "group-hover/card:text-pink-200",
+                                            event.color === "purple" && "group-hover/card:text-purple-200",
+                                            event.color === "blue" && "group-hover/card:text-blue-200",
+                                            event.color === "yellow" && "group-hover/card:text-yellow-200"
+                                        )}
+                                    >
+                                        {event.title}
+                                    </h4>
 
-                                        <h4
-                                            className={cn(
-                                                "dark:text-white text-neutral-900 font-medium text-base leading-snug mb-2 line-clamp-2 transition-colors",
-                                                event.color === "pink" && "group-hover/card:text-pink-200",
-                                                event.color === "purple" && "group-hover/card:text-purple-200",
-                                                event.color === "blue" && "group-hover/card:text-blue-200",
-                                                event.color === "yellow" && "group-hover/card:text-yellow-200"
-                                            )}
-                                        >
-                                            {event.title}
-                                        </h4>
-
-                                        <p className="text-neutral-600 text-[11px] flex items-center gap-1 mt-auto">
-                                            <MapPin size={10} />
-                                            {event.location}
-                                        </p>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
+                                    <p className="text-neutral-600 text-[11px] flex items-center gap-1 mt-auto">
+                                        <MapPin size={10} />
+                                        {event.location}
+                                    </p>
+                                </div>
+                            </Link>
+                        ))}
+                    </motion.div>
                 </div>
-
-            </div>
+            </motion.div>
         </section>
     );
 }

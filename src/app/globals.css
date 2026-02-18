@@ -55,7 +55,7 @@
   --color-brand-dark: #020202;
 
   /* Custom Animations */
-  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee: marquee 25s linear infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-glow: pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-blob: blob 7s infinite;

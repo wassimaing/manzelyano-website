@@ -3,6 +3,7 @@
 import React from "react";
 import { ShieldCheck, Heart, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import Link from "next/link";
 
 export function About() {
@@ -10,7 +11,12 @@ export function About() {
         <section id="about" className="w-full max-w-[1200px] px-6 py-24 md:py-32 z-20 relative mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div className="flex flex-col gap-10">
-                    <div className="reveal-text reveal-visible">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                    >
                         <span className="text-sm font-mono text-pink-500 uppercase tracking-widest mb-3 flex items-center gap-2">
                             <span className="w-8 h-[1px] bg-pink-500"></span> Our Mission
                         </span>
@@ -20,10 +26,16 @@ export function About() {
                                 Leaders Today.
                             </span>
                         </h2>
-                    </div>
+                    </motion.div>
 
                     <div className="space-y-8">
-                        <div className="reveal-text reveal-visible delay-100 pl-6 border-l-2 border-pink-500/30">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6, delay: 0.1 }}
+                            className="pl-6 border-l-2 border-pink-500/30"
+                        >
                             <h3 className="text-2xl font-semibold dark:text-white text-neutral-900 mb-3 flex items-center gap-2">
                                 <ShieldCheck className="text-pink-500" size={24} /> Youth Empowerment
                             </h3>
@@ -32,9 +44,15 @@ export function About() {
                                 responsibility. We believe every individual holds the potential to
                                 lead and inspire change.
                             </p>
-                        </div>
+                        </motion.div>
 
-                        <div className="reveal-text reveal-visible delay-200 pl-6 border-l-2 border-purple-500/30">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="pl-6 border-l-2 border-purple-500/30"
+                        >
                             <h3 className="text-2xl font-semibold dark:text-white text-neutral-900 mb-3 flex items-center gap-2">
                                 <Heart className="text-purple-500" size={24} /> Community Service
                             </h3>
@@ -43,9 +61,15 @@ export function About() {
                                 connect with our community. From environmental cleanups to
                                 cultural workshops.
                             </p>
-                        </div>
+                        </motion.div>
 
-                        <div className="reveal-text reveal-visible delay-300 pt-4">
+                        <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.5, delay: 0.3 }}
+                            className="pt-4"
+                        >
                             <Link
                                 href="/about"
                                 className="inline-flex items-center gap-2 text-pink-500 font-bold dark:hover:text-white hover:text-neutral-900 transition-colors group"
@@ -53,11 +77,17 @@ export function About() {
                                 Learn More About Us
                                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                             </Link>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
 
-                <div className="relative h-[500px] md:h-[650px] w-full rounded-3xl overflow-hidden glass-panel reveal-text reveal-visible delay-300 group">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    className="relative h-[500px] md:h-[650px] w-full rounded-3xl overflow-hidden glass-panel group"
+                >
                     <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-purple-900/40 z-10 group-hover:opacity-0 transition-opacity duration-500"></div>
                     <img
                         src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=2649&auto=format&fit=crop"
@@ -78,7 +108,7 @@ export function About() {
                             &gt; location: Rue Ibn Abi Dhief
                         </p>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </section>
     );

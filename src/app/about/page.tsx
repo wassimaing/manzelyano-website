@@ -22,10 +22,17 @@ import {
     X,
     ChevronRight
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useTransform, animate, useInView, useMotionValueEvent } from "framer-motion";
 import Link from "next/link";
 import { testimonials } from "@/data/testimonials";
 import { departments, TeamMember, Department } from "@/data/team";
+import {
+    Drawer,
+    DrawerContent,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerDescription,
+} from "@/components/ui/drawer";
 
 const iconMap: { [key: string]: any } = {
     GraduationCap,
@@ -35,9 +42,51 @@ const iconMap: { [key: string]: any } = {
     Smile
 };
 
+function CountUp({ value, suffix = "" }: { value: number; suffix?: string }) {
+    const ref = React.useRef<HTMLSpanElement>(null);
+    const isInView = useInView(ref, { once: true, margin: "-100px" });
+    const count = useMotionValue(0);
+
+    React.useEffect(() => {
+        if (isInView) {
+            animate(count, value, { duration: 2, ease: "easeOut" });
+        }
+    }, [isInView, value, count]);
+
+    useMotionValueEvent(count, "change", (latest) => {
+        if (ref.current) {
+            ref.current.textContent = Math.round(latest) + suffix;
+        }
+    });
+
+    return <span ref={ref}>0{suffix}</span>;
+}
+
 export default function AboutPage() {
     const [selectedDept, setSelectedDept] = React.useState<Department | null>(null);
     const [selectedMember, setSelectedMember] = React.useState<TeamMember | null>(null);
+    const [isMobile, setIsMobile] = React.useState(false);
+
+    React.useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    // Disable scrolling when any popup is open
+    React.useEffect(() => {
+        if (selectedDept || selectedMember) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
+        }
+        return () => {
+            document.body.style.overflow = "unset";
+        };
+    }, [selectedDept, selectedMember]);
 
     return (
         <>
@@ -74,23 +123,60 @@ export default function AboutPage() {
                     </motion.p>
                 </section>
 
-                {/* Stats Section */}
                 <section className="py-20 dark:bg-neutral-900/30 bg-neutral-100/50 border-y dark:border-white/5 border-neutral-200 relative z-10">
                     <div className="container mx-auto px-6">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-                            <div className="space-y-2">
-                                <h3 className="text-5xl font-display font-bold dark:text-white text-neutral-900">120+</h3>
+                        <motion.div
+                            initial="hidden"
+                            whileInView="show"
+                            viewport={{ once: true, margin: "-100px" }}
+                            variants={{
+                                hidden: { opacity: 0 },
+                                show: {
+                                    opacity: 1,
+                                    transition: {
+                                        staggerChildren: 0.15
+                                    }
+                                }
+                            }}
+                            className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center"
+                        >
+                            <motion.div
+                                variants={{
+                                    hidden: { opacity: 0, y: 20 },
+                                    show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                                }}
+                                className="space-y-2"
+                            >
+                                <h3 className="text-5xl font-display font-bold dark:text-white text-neutral-900">
+                                    <CountUp value={120} suffix="+" />
+                                </h3>
                                 <p className="text-pink-500 font-mono tracking-widest uppercase text-sm">Active Members</p>
-                            </div>
-                            <div className="space-y-2">
-                                <h3 className="text-5xl font-display font-bold dark:text-white text-neutral-900">4</h3>
+                            </motion.div>
+                            <motion.div
+                                variants={{
+                                    hidden: { opacity: 0, y: 20 },
+                                    show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                                }}
+                                className="space-y-2"
+                            >
+                                <h3 className="text-5xl font-display font-bold dark:text-white text-neutral-900">
+                                    <CountUp value={4} />
+                                </h3>
                                 <p className="text-purple-500 font-mono tracking-widest uppercase text-sm">Major Activities</p>
-                            </div>
-                            <div className="space-y-2">
-                                <h3 className="text-5xl font-display font-bold dark:text-white text-neutral-900">5</h3>
+                            </motion.div>
+                            <motion.div
+                                variants={{
+                                    hidden: { opacity: 0, y: 20 },
+                                    show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                                }}
+                                className="space-y-2"
+                            >
+                                <h3 className="text-5xl font-display font-bold dark:text-white text-neutral-900">
+                                    <CountUp value={5} />
+                                </h3>
                                 <p className="text-blue-500 font-mono tracking-widest uppercase text-sm">Departments</p>
-                            </div>
-                        </div>
+                            </motion.div>
+                        </motion.div>
                     </div>
                 </section>
 
@@ -145,14 +231,34 @@ export default function AboutPage() {
 
                 {/* Departments Section */}
                 <section id="departments" className="container mx-auto px-6 py-32 relative z-10">
-                    <div className="text-center mb-20">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8 }}
+                        className="text-center mb-20"
+                    >
                         <h2 className="text-4xl md:text-5xl font-display font-bold dark:text-white text-neutral-900 mb-6 uppercase tracking-tighter">Our Departments</h2>
                         <p className="dark:text-neutral-400 text-neutral-600 max-w-2xl mx-auto text-lg leading-relaxed">
                             Our organization is built on specialized departments. Click on a department to meet its members.
                         </p>
-                    </div>
+                    </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, margin: "-100px" }}
+                        variants={{
+                            hidden: { opacity: 0 },
+                            show: {
+                                opacity: 1,
+                                transition: {
+                                    staggerChildren: 0.1
+                                }
+                            }
+                        }}
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                    >
                         {departments.map((dept, i) => {
                             const IconComponent = iconMap[dept.icon];
                             const isActive = selectedDept?.id === dept.id;
@@ -162,6 +268,10 @@ export default function AboutPage() {
                                     key={i}
                                     layoutId={`dept-${dept.id}`}
                                     onClick={() => setSelectedDept(isActive ? null : dept)}
+                                    variants={{
+                                        hidden: { opacity: 0, scale: 0.95 },
+                                        show: { opacity: 1, scale: 1, transition: { duration: 0.5 } }
+                                    }}
                                     whileHover={{ y: -5 }}
                                     className={`p-8 rounded-[2.5rem] bg-gradient-to-br ${dept.color} border ${isActive ? "border-pink-500" : "dark:border-white/10 border-neutral-200"} dark:hover:border-white/20 hover:border-neutral-300 transition-all group cursor-pointer relative overflow-hidden`}
                                 >
@@ -183,11 +293,11 @@ export default function AboutPage() {
                                 </motion.div>
                             );
                         })}
-                    </div>
+                    </motion.div>
 
-                    {/* Chief Operating Officers Modal */}
+                    {/* Chief Operating Officers Modal/Drawer */}
                     <AnimatePresence>
-                        {selectedDept && (
+                        {selectedDept && !isMobile && (
                             <div className="fixed inset-0 z-[80] flex items-center justify-center p-6 sm:p-10 pointer-events-auto">
                                 <motion.div
                                     initial={{ opacity: 0 }}
@@ -244,11 +354,48 @@ export default function AboutPage() {
                             </div>
                         )}
                     </AnimatePresence>
+
+                    {/* Mobile Drawer for Departments */}
+                    <Drawer open={!!selectedDept && isMobile} onOpenChange={(open) => !open && setSelectedDept(null)}>
+                        <DrawerContent className="dark:bg-neutral-900 bg-white border-t dark:border-white/10 border-neutral-200">
+                            <DrawerHeader className="text-left">
+                                <DrawerTitle className="text-2xl font-bold flex items-center gap-3">
+                                    <div className={`p-2 rounded-lg dark:bg-black/40 bg-neutral-100 ${selectedDept?.iconColor}`}>
+                                        {selectedDept && React.createElement(iconMap[selectedDept.icon], { size: 20 })}
+                                    </div>
+                                    <span className="dark:text-white text-neutral-900">{selectedDept?.name}</span>
+                                </DrawerTitle>
+                                <DrawerDescription className="text-pink-500 font-mono text-[10px] tracking-widest uppercase">
+                                    Chief Operating Officers
+                                </DrawerDescription>
+                            </DrawerHeader>
+                            <div className="px-6 py-4 overflow-y-auto max-h-[60vh]">
+                                <div className="space-y-4">
+                                    {selectedDept?.members.map((member, index) => (
+                                        <div
+                                            key={index}
+                                            onClick={() => setSelectedMember(member)}
+                                            className="flex items-center gap-4 dark:bg-white/5 bg-neutral-50 p-4 rounded-2xl border dark:border-white/5 border-neutral-200 active:scale-95 transition-transform"
+                                        >
+                                            <div className="w-14 h-14 rounded-full overflow-hidden border-2 dark:border-white/10 border-neutral-200 shrink-0">
+                                                <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                                            </div>
+                                            <div>
+                                                <h4 className="dark:text-white text-neutral-900 font-bold text-base">{member.name}</h4>
+                                                <span className="text-[10px] text-pink-500 font-mono uppercase font-bold">{member.role}</span>
+                                            </div>
+                                            <ChevronRight className="ml-auto text-neutral-500" size={16} />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </DrawerContent>
+                    </Drawer>
                 </section>
 
-                {/* Member Details Modal */}
+                {/* Member Details Modal/Drawer */}
                 <AnimatePresence>
-                    {selectedMember && (
+                    {selectedMember && !isMobile && (
                         <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 sm:p-10 pointer-events-auto">
                             <motion.div
                                 initial={{ opacity: 0 }}
@@ -337,20 +484,89 @@ export default function AboutPage() {
                     )}
                 </AnimatePresence>
 
+                {/* Mobile Drawer for Member Details */}
+                <Drawer open={!!selectedMember && isMobile} onOpenChange={(open) => !open && setSelectedMember(null)}>
+                    <DrawerContent className="dark:bg-neutral-900 bg-white border-t dark:border-white/10 border-neutral-200">
+                        <div className="px-6 py-8 overflow-y-auto max-h-[85vh]">
+                            <div className="flex flex-col items-center text-center mb-8">
+                                <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-pink-500 shadow-xl mb-4">
+                                    <img src={selectedMember?.image} alt={selectedMember?.name} className="w-full h-full object-cover" />
+                                </div>
+                                <h3 className="text-2xl font-bold dark:text-white text-neutral-900 uppercase tracking-tight">{selectedMember?.name}</h3>
+                                <span className="text-xs text-pink-500 font-mono tracking-widest uppercase font-bold">{selectedMember?.role}</span>
+                            </div>
+
+                            <div className="space-y-6 relative">
+                                <Quote className="absolute -top-4 -left-2 text-pink-500/10" size={40} />
+                                <p className="dark:text-neutral-300 text-neutral-600 italic leading-relaxed text-base">
+                                    "{selectedMember?.experience}"
+                                </p>
+
+                                <div className="space-y-4 pt-6 border-t dark:border-white/5 border-neutral-200">
+                                    <a
+                                        href={`mailto:${selectedMember?.email}`}
+                                        className="flex items-center gap-3 p-4 rounded-xl dark:bg-white/5 bg-neutral-50 border dark:border-white/5 border-neutral-200"
+                                    >
+                                        <div className="p-2 rounded-lg bg-pink-500/10 text-pink-500">
+                                            <Mail size={18} />
+                                        </div>
+                                        <div className="text-left">
+                                            <p className="text-[10px] text-neutral-500 font-mono uppercase">Email</p>
+                                            <p className="dark:text-white text-neutral-900 font-semibold text-sm">{selectedMember?.email}</p>
+                                        </div>
+                                    </a>
+
+                                    <div className="flex items-center gap-3 p-4 rounded-xl dark:bg-white/5 bg-neutral-50 border dark:border-white/5 border-neutral-200">
+                                        <div className="p-2 rounded-lg bg-purple-500/10 text-purple-500">
+                                            <Briefcase size={18} />
+                                        </div>
+                                        <div className="text-left">
+                                            <p className="text-[10px] text-neutral-500 font-mono uppercase">Department</p>
+                                            <p className="dark:text-white text-neutral-900 font-semibold text-sm">{selectedMember?.department}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </DrawerContent>
+                </Drawer>
+
                 {/* Testimonials Marquee Section */}
                 <section className="py-32 dark:bg-black bg-white relative overflow-hidden">
-                    <div className="container mx-auto px-6 relative z-10 mb-16 text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8 }}
+                        className="container mx-auto px-6 relative z-10 mb-16 text-center"
+                    >
                         <span className="text-pink-500 font-mono text-sm tracking-widest uppercase mb-4 block">Feedback</span>
                         <h2 className="text-4xl md:text-6xl font-display font-bold dark:text-white text-neutral-900 mb-6">What our family says</h2>
-                    </div>
+                    </motion.div>
 
-                    <div className="relative w-full overflow-hidden group">
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 1, delay: 0.2 }}
+                        className="relative w-full overflow-hidden group"
+                    >
                         {/* Gradient Masks */}
                         <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 dark:bg-gradient-to-r dark:from-black dark:to-transparent bg-gradient-to-r from-white to-transparent z-20 pointer-events-none"></div>
                         <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 dark:bg-gradient-to-l dark:from-black dark:to-transparent bg-gradient-to-l from-white to-transparent z-20 pointer-events-none"></div>
 
-                        <div className="flex gap-6 animate-marquee hover:[animation-play-state:paused] w-max px-4">
-                            {[...testimonials, ...testimonials].map((item, index) => (
+                        <motion.div
+                            className="flex gap-6 items-center w-max"
+                            animate={{
+                                x: ["0%", "-25%"],
+                            }}
+                            transition={{
+                                duration: 30,
+                                ease: "linear",
+                                repeat: Infinity,
+                            }}
+                        >
+                            {[...testimonials, ...testimonials, ...testimonials, ...testimonials].map((item, index) => (
                                 <div
                                     key={index}
                                     className="w-[300px] md:w-[400px] dark:bg-neutral-900/50 bg-neutral-50 border dark:border-white/5 border-neutral-200 rounded-[2rem] p-8 backdrop-blur-sm dark:hover:bg-neutral-800/50 hover:bg-neutral-100 transition-colors shrink-0 flex flex-col relative"
@@ -378,47 +594,79 @@ export default function AboutPage() {
                                     </p>
                                 </div>
                             ))}
-                        </div>
-                    </div>
+                        </motion.div>
+                    </motion.div>
                 </section>
 
                 {/* Social Media Section */}
                 <section className="container mx-auto px-6 py-40 text-center relative z-10">
                     <div className="max-w-4xl mx-auto">
-                        <h2 className="text-5xl md:text-7xl font-display font-bold dark:text-white text-neutral-900 mb-16 px-4">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.8 }}
+                            className="text-5xl md:text-7xl font-display font-bold dark:text-white text-neutral-900 mb-16 px-4"
+                        >
                             FOLLOW US IN <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">SOCIAL MEDIA</span>
-                        </h2>
+                        </motion.h2>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <a
+                        <motion.div
+                            initial="hidden"
+                            whileInView="show"
+                            viewport={{ once: true, margin: "-100px" }}
+                            variants={{
+                                hidden: { opacity: 0 },
+                                show: {
+                                    opacity: 1,
+                                    transition: {
+                                        staggerChildren: 0.15
+                                    }
+                                }
+                            }}
+                            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+                        >
+                            <motion.a
                                 href="https://facebook.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                variants={{
+                                    hidden: { opacity: 0, scale: 0.9 },
+                                    show: { opacity: 1, scale: 1, transition: { duration: 0.6 } }
+                                }}
                                 className="group p-10 rounded-[2.5rem] bg-[#1877F2]/10 border border-[#1877F2]/20 hover:bg-[#1877F2]/20 hover:border-[#1877F2]/40 transition-all flex flex-col items-center gap-6"
                             >
                                 <div className="p-6 bg-[#1877F2] rounded-[1.5rem] text-white shadow-[0_0_30px_rgba(24,119,242,0.4)] group-hover:scale-110 transition-transform">
                                     <Facebook size={40} />
                                 </div>
                                 <span className="dark:text-white text-neutral-900 font-bold text-xl tracking-widest group-hover:text-[#1877F2] transition-colors uppercase">Facebook</span>
-                            </a>
+                            </motion.a>
 
-                            <a
+                            <motion.a
                                 href="https://instagram.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                variants={{
+                                    hidden: { opacity: 0, scale: 0.9 },
+                                    show: { opacity: 1, scale: 1, transition: { duration: 0.6 } }
+                                }}
                                 className="group p-10 rounded-[2.5rem] bg-gradient-to-br from-pink-500/10 to-purple-500/10 border border-pink-500/20 hover:border-pink-500/40 transition-all flex flex-col items-center gap-6"
                             >
                                 <div className="p-6 bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCB045] rounded-[1.5rem] text-white shadow-[0_0_30px_rgba(253,29,29,0.3)] group-hover:scale-110 transition-transform">
                                     <Instagram size={40} />
                                 </div>
                                 <span className="dark:text-white text-neutral-900 font-bold text-xl tracking-widest group-hover:text-pink-500 transition-colors uppercase">Instagram</span>
-                            </a>
+                            </motion.a>
 
-                            <a
+                            <motion.a
                                 href="https://tiktok.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                variants={{
+                                    hidden: { opacity: 0, scale: 0.9 },
+                                    show: { opacity: 1, scale: 1, transition: { duration: 0.6 } }
+                                }}
                                 className="group p-10 rounded-[2.5rem] dark:bg-white/5 bg-neutral-100 dark:border-white/10 border-neutral-200 border dark:hover:bg-neutral-800/50 hover:bg-neutral-200 transition-all flex flex-col items-center gap-6"
                             >
                                 <div className="p-6 bg-black rounded-[1.5rem] text-white shadow-[0_0_30px_rgba(255,255,255,0.1)] group-hover:scale-110 transition-transform relative overflow-hidden">
@@ -433,8 +681,8 @@ export default function AboutPage() {
                                     </svg>
                                 </div>
                                 <span className="dark:text-white text-neutral-900 font-bold text-xl tracking-widest group-hover:text-[#00f2ea] transition-colors uppercase">TikTok</span>
-                            </a>
-                        </div>
+                            </motion.a>
+                        </motion.div>
                     </div>
                 </section>
             </main>
