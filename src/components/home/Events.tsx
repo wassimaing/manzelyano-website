@@ -28,9 +28,9 @@ export function Events() {
                         <img
                             src={featuredEvent.image}
                             alt=""
-                            className="w-full h-full object-cover opacity-[0.75] blur-[4px] scale-150 rotate-3"
+                            className="w-full h-full object-cover dark:opacity-[0.75] opacity-[0.35] dark:blur-[4px] blur-[1.5px] scale-150 rotate-3"
                         />
-                        <div className="absolute inset-0 dark:bg-gradient-to-b dark:from-black/20 dark:via-transparent dark:to-[#0a0a0a] bg-gradient-to-b from-white/20 via-transparent to-white" />
+                        <div className="absolute inset-0 dark:bg-gradient-to-b dark:from-black/20 dark:via-transparent dark:to-[#0a0a0a] bg-gradient-to-b from-white/60 via-white/10 to-white" />
                     </div>
 
                     {/* Ambient glow */}
@@ -45,7 +45,7 @@ export function Events() {
                                 <span className="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse" />
                                 Featured Event
                             </span>
-                            <span className="text-neutral-500 font-mono text-xs">{featuredEvent.date}</span>
+                            <span className="dark:text-neutral-500 text-neutral-800 font-mono text-xs font-bold">{featuredEvent.date}</span>
                         </div>
 
                         {/* Content grid */}
@@ -56,12 +56,14 @@ export function Events() {
                                 <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight dark:text-white text-neutral-900 leading-[1.05] mb-5">
                                     {featuredEvent.title}
                                 </h2>
-                                <p className="dark:text-neutral-400 text-neutral-600 text-sm sm:text-base leading-relaxed max-w-xl line-clamp-3">
-                                    {featuredEvent.overview}
+                                <p className="dark:text-neutral-400 text-neutral-800 text-sm sm:text-base leading-relaxed max-w-xl line-clamp-3 font-medium">
+                                    {featuredEvent.overview.includes('.')
+                                        ? featuredEvent.overview.split('.').slice(1).join('.').trim()
+                                        : featuredEvent.overview}
                                 </p>
                                 {featuredEvent.location && (
-                                    <p className="mt-4 dark:text-neutral-500 text-neutral-400 text-xs flex items-center gap-1.5">
-                                        <MapPin size={12} className="text-pink-500" />
+                                    <p className="mt-4 dark:text-neutral-500 text-neutral-900 text-xs font-bold flex items-center gap-1.5">
+                                        <MapPin size={12} className="text-pink-600" />
                                         {featuredEvent.location}
                                     </p>
                                 )}

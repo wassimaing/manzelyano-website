@@ -49,7 +49,7 @@ function CountUp({ value, suffix = "" }: { value: number; suffix?: string }) {
 
     React.useEffect(() => {
         if (isInView) {
-            animate(count, value, { duration: 2, ease: "easeOut" });
+            animate(count, value, { duration: 3.5, ease: "easeOut" });
         }
     }, [isInView, value, count]);
 
@@ -102,7 +102,7 @@ export default function AboutPage() {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-pink-500 font-mono text-sm tracking-[0.3em] uppercase mb-4 block"
                     >
-                        Learn More
+                        Learn More about
                     </motion.span>
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
@@ -111,7 +111,7 @@ export default function AboutPage() {
                         className="text-6xl md:text-8xl font-display font-bold dark:text-white text-neutral-900 mb-8 tracking-tighter"
                     >
                         The Heart of <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">About Us.</span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">Manzelyano.</span>
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -119,7 +119,7 @@ export default function AboutPage() {
                         transition={{ delay: 0.2 }}
                         className="text-xl dark:text-neutral-400 text-neutral-600 max-w-3xl mx-auto leading-relaxed"
                     >
-                        Menzel Yano Bosco Youth is more than a club; it's a family dedicated to youth development, community service, and creative expression in Menzel Bourguiba.
+                        ManzelYano Bosco Youth is more than a club; it's a family dedicated to youth development, community service, and creative expression in Menzel Bourguiba.
                     </motion.p>
                 </section>
 
@@ -201,11 +201,11 @@ export default function AboutPage() {
                             </p>
                             <div className="grid grid-cols-2 gap-8 pt-4">
                                 <div>
-                                    <h4 className="dark:text-white text-neutral-900 font-bold text-3xl mb-1">10+</h4>
+                                    <h4 className="dark:text-white text-neutral-900 font-bold text-3xl mb-1">8+</h4>
                                     <p className="dark:text-neutral-500 text-neutral-400 text-sm uppercase tracking-wider">Years of Impact</p>
                                 </div>
                                 <div>
-                                    <h4 className="dark:text-white text-neutral-900 font-bold text-3xl mb-1">500+</h4>
+                                    <h4 className="dark:text-white text-neutral-900 font-bold text-3xl mb-1">80+</h4>
                                     <p className="dark:text-neutral-500 text-neutral-400 text-sm uppercase tracking-wider">Alumni Members</p>
                                 </div>
                             </div>
@@ -223,7 +223,7 @@ export default function AboutPage() {
                             />
                             <div className="absolute inset-0 dark:bg-gradient-to-t dark:from-black dark:via-transparent dark:to-transparent bg-gradient-to-t from-white via-transparent to-transparent"></div>
                             <div className="absolute bottom-10 left-10">
-                                <span className="dark:text-white text-neutral-900 font-bold text-lg">Since 2014.</span>
+                                <span className="dark:text-white text-neutral-900 font-bold text-lg">Since 2019.</span>
                             </div>
                         </motion.div>
                     </div>
