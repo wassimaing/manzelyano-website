@@ -32,7 +32,7 @@ export const departments: Department[] = [
                 department: "Formation",
                 email: "joumana.aoun@manzelyano.org",
                 experience: "With over 10 years of experience in educational methodology and youth empowerment, Sister Joumana has pioneered our formation programs, focusing on spiritual and pedagogical development that transforms how we engage with our community.",
-                image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=2576&auto=format&fit=crop"
+                image: "/images/COO/sister joumana aoun.jpeg"
             },
             {
                 name: "SISTER CRISTINA VARGAS",
@@ -40,7 +40,7 @@ export const departments: Department[] = [
                 department: "Formation",
                 email: "cristina.vargas@manzelyano.org",
                 experience: "Sister Cristina brings international experience in vocational training and community formation. She specializes in creating interactive workshops that foster creativity and leadership skills among young participants.",
-                image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=2574&auto=format&fit=crop"
+                image: "/images/COO/sister cristina vargas.jpeg"
             }
         ]
     },
@@ -58,7 +58,7 @@ export const departments: Department[] = [
                 department: "Communication",
                 email: "wassim.guebsi@manzelyano.org",
                 experience: "Wassim is a digital marketing strategist focused on community building. His expertise in brand storytelling and event promotion has significantly grown our online presence and engagement.",
-                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2574&auto=format&fit=crop"
+                image: "/images/COO/Mohamed Wassim Guebsi.png"
             },
             {
                 name: "Maryem Dridi",
@@ -66,7 +66,7 @@ export const departments: Department[] = [
                 department: "Communication",
                 email: "maryem.dridi@manzelyano.org",
                 experience: "Maryem is a creative director passionate about visual communication. She ensures that every Manzel Yano campaign captures the essence of our mission through compelling content and storytelling.",
-                image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2574&auto=format&fit=crop"
+                image: "/images/COO/maryem dridi.jpeg"
             },
             {
                 name: "Kenza Bouras",
@@ -74,28 +74,11 @@ export const departments: Department[] = [
                 department: "Communication",
                 email: "kenza.bouras@manzelyano.org",
                 experience: "Kenza manages our internal communications and member development. Her focus is on fostering a positive and productive environment for all our volunteers and staff.",
-                image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2574&auto=format&fit=crop"
+                image: "/images/COO/Kenza Bouras.png"
             }
         ]
     },
-    {
-        id: "deco",
-        name: "Decoration",
-        description: "Transforming spaces into creative environments for our events and workshops.",
-        icon: "Palette",
-        color: "from-yellow-500/10 to-yellow-600/10",
-        iconColor: "text-yellow-400",
-        members: [
-            {
-                name: "Mohamed Thenour Bejaoui",
-                role: "Responsable Decoration",
-                department: "Decoration",
-                email: "mohamed.bejaoui@manzelyano.org",
-                experience: "Mohamed transforms vision into reality. His keen eye for spatial design and aesthetic harmony ensures that every Manzel Yano event feels unique, professional, and inspiring for everyone.",
-                image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=2574&auto=format&fit=crop"
-            }
-        ]
-    },
+
     {
         id: "logistics",
         name: "Logistique",
@@ -105,12 +88,12 @@ export const departments: Department[] = [
         iconColor: "text-purple-400",
         members: [
             {
-                name: "Maryem Hammas",
+                name: "Mariem Hammas",
                 role: "Co responsable Logistique",
                 department: "Logistique",
                 email: "maryem.hammas@manzelyano.org",
                 experience: "Maryem ensures that every logistical detail is meticulously planned and executed, from site preparation to resource allocation, guaranteeing a seamless experience for all our events.",
-                image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2574&auto=format&fit=crop"
+                image: "/images/COO/Mariem Hammas.jpeg"
             },
             {
                 name: "Fares Saad",
@@ -118,7 +101,7 @@ export const departments: Department[] = [
                 department: "Logistique",
                 email: "fares.saad@manzelyano.org",
                 experience: "Fares coordinates our operational logistics with precision. His expertise in supply chain management and event setup ensures that everything is in its place at the right time.",
-                image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2574&auto=format&fit=crop"
+                image: "/images/COO/fares saad.jpeg"
             }
         ]
     },
@@ -136,7 +119,7 @@ export const departments: Department[] = [
                 department: "Animation",
                 email: "yara.bouhadida@manzelyano.org",
                 experience: "Yara brings magic to Manzel Yano. Her expertise in youth animation and team-building games allows her to create memorable experiences that foster personal growth among our members.",
-                image: "https://images.unsplash.com/photo-1520699049698-acd2fcc51606?q=80&w=2574&auto=format&fit=crop"
+                image: "/images/COO/yara bouhadida.jpeg"
             },
             {
                 name: "Yassmin ben blel",
@@ -144,7 +127,25 @@ export const departments: Department[] = [
                 department: "Animation",
                 email: "yassmin.benblel@manzelyano.org",
                 experience: "Yassmin specializes in creative engagement and interactive storytelling. Her energy and enthusiasm make every animation session a highlight for the youth we serve.",
-                image: "https://images.unsplash.com/photo-1548142813-c348350df52b?q=80&w=2578&auto=format&fit=crop"
+                image: "/images/COO/yassmin ben blel.png"
+            }
+        ]
+    },
+    {
+        id: "deco",
+        name: "Decoration",
+        description: "Transforming spaces into creative environments for our events and workshops.",
+        icon: "Palette",
+        color: "from-yellow-500/10 to-yellow-600/10",
+        iconColor: "text-yellow-400",
+        members: [
+            {
+                name: "Mohamed Thenour Bejaoui",
+                role: "Responsable Decoration",
+                department: "Decoration",
+                email: "mohamed.bejaoui@manzelyano.org",
+                experience: "Mohamed transforms vision into reality. His keen eye for spatial design and aesthetic harmony ensures that every Manzel Yano event feels unique, professional, and inspiring for everyone.",
+                image: "/images/COO/mohamed thenour bejaoui.jpeg"
             }
         ]
     }

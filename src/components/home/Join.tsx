@@ -70,18 +70,18 @@ export function Join() {
                                 />
                             </div>
 
-                            <div className="grid grid-cols-2 gap-5">
+                            <div className="grid grid-cols-2 gap-4 md:gap-6">
                                 <div className="space-y-1.5">
                                     <label className="text-[10px] uppercase tracking-wider dark:text-neutral-400 text-neutral-500 font-bold ml-1">
                                         Date of Birth
                                     </label>
                                     <Input
                                         type="date"
-                                        className="dark:bg-white/5 bg-neutral-50 dark:border-white/10 border-neutral-200 dark:text-white text-neutral-900 dark:placeholder:text-neutral-600 placeholder:text-neutral-400 dark:focus-visible:bg-white/10 focus-visible:bg-neutral-100 focus-visible:ring-pink-500 text-sm py-6 rounded-xl block"
+                                        className="dark:bg-white/5 bg-neutral-50 dark:border-white/10 border-neutral-200 dark:text-white text-neutral-900 dark:placeholder:text-neutral-600 placeholder:text-neutral-400 dark:focus-visible:bg-white/10 focus-visible:bg-neutral-100 focus-visible:ring-pink-500 text-sm py-6 rounded-xl"
                                     />
                                 </div>
                                 <div className="space-y-1.5">
-                                    <label className="text-[10px] uppercase tracking-wider dark:text-neutral-400 text-neutral-500 font-bold ml-1">
+                                    <label className="text-[10px] uppercase tracking-wider dark:text-neutral-400 text-neutral-500 font-bold ml-1 text-nowrap">
                                         Institute / University
                                     </label>
                                     <Input

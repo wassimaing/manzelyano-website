@@ -29,13 +29,13 @@ export default function EventsPage() {
                         className="text-center mb-16"
                     >
                         <span className="text-sm font-mono text-pink-500 uppercase tracking-widest mb-3 flex items-center justify-center gap-2">
-                            <span className="w-8 h-[1px] bg-pink-500"></span> Upcoming Activities
+                            <span className="w-8 h-[1px] bg-pink-500"></span> Explore Our Events
                         </span>
                         <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight dark:text-white text-neutral-900 leading-[0.95] mb-6">
                             Events <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Calendar</span>
                         </h1>
                         <p className="dark:text-neutral-400 text-neutral-600 max-w-2xl mx-auto text-lg">
-                            Join us in our journey of impact. Browse our upcoming events and be part of the change in Menzel Bourguiba.
+                            Join us in our journey of impact. Browse our events and be part of the change in Menzel Bourguiba.
                         </p>
                     </motion.div>
 

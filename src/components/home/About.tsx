@@ -102,7 +102,7 @@ export function About() {
                             <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_10px_#9333ea]"></div>
                             <div className="w-2 h-2 rounded-full dark:bg-white bg-neutral-900"></div>
                         </div>
-                        <p className="font-mono text-xs text-pink-200 dark:text-pink-200 leading-relaxed">
+                        <p className="font-mono text-xs dark:text-pink-200 text-pink-700 leading-relaxed font-bold">
                             &gt; project: education_for_all<br />
                             &gt; status: active<br />
                             &gt; location: Rue Ibn Abi Dhief

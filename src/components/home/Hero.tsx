@@ -458,9 +458,9 @@ export function Hero() {
                         style={{ transform: "translateZ(0px)" }}
                     >
                         <img
-                            src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=2670&auto=format&fit=crop"
-                            alt="Youth Group Menzel Bourguiba"
-                            className="w-full h-full object-cover opacity-50 grayscale-[30%] scale-105"
+                            src="/images/image.png"
+                            alt="Youth Group ManzelYano"
+                            className="w-full h-full object-cover opacity-30 dark:opacity-20 grayscale-[20%] scale-105"
                         />
                     </div>
                 </div>
