@@ -20,7 +20,7 @@ import {
     Heart
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { TeamMember, Department } from "@/data/team";
+import { Department, TeamMember } from "@/data/team";
 import { Testimonial } from "@/data/testimonials";
 
 const iconMap: { [key: string]: any } = {

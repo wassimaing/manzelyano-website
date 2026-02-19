@@ -2,16 +2,17 @@
 
 import Link from "next/link";
 import { Users, ChevronRight } from "lucide-react";
-import { departments as mockDepartments, Department } from "@/data/team";
+import { Department } from "@/data/team";
+
 
 interface TeamProps {
     initialDepartments?: Department[];
 }
 
 export function Team({ initialDepartments }: TeamProps) {
-    const data = initialDepartments && initialDepartments.length > 0 ? initialDepartments : mockDepartments;
+    const data = initialDepartments && initialDepartments.length > 0 ? initialDepartments : undefined
     // Flatten all members into one list of Chief Operating Officers
-    const coos = data.flatMap(dept => dept.members);
+    const coos = data?.flatMap(dept => dept.members);
 
     return (
         <section id="team" className="w-full max-w-[1200px] px-6 py-24 z-20 mx-auto">
@@ -28,7 +29,7 @@ export function Team({ initialDepartments }: TeamProps) {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-                {coos.map((member, index) => (
+                {coos?.map((member, index) => (
                     <div
                         key={index}
                         className="group relative"

@@ -461,7 +461,7 @@ export function Hero({ initialEventsCount }: HeroProps) {
                         style={{ transform: "translateZ(0px)" }}
                     >
                         <img
-                            src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=2670&auto=format&fit=crop"
+                            src="images/photohero.png"
                             alt="Youth Group Menzel Bourguiba"
                             className="w-full h-full object-cover opacity-50 grayscale-[30%] scale-105"
                         />

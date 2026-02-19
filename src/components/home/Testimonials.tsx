@@ -2,15 +2,15 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
-import { testimonials as mockTestimonials, Testimonial } from "@/data/testimonials";
 import { Quote } from "lucide-react";
+import { Testimonial, testimonials } from "@/data/testimonials";
 
 interface TestimonialsProps {
     initialTestimonials?: Testimonial[];
 }
 
 export function Testimonials({ initialTestimonials }: TestimonialsProps) {
-    const data = initialTestimonials && initialTestimonials.length > 0 ? initialTestimonials : mockTestimonials;
+    const data = initialTestimonials && initialTestimonials.length > 0 ? initialTestimonials : testimonials;
 
     return (
         <section className="relative w-full py-20 overflow-hidden bg-black z-20">

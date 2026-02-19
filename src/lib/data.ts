@@ -7,11 +7,14 @@ import { Event } from '@/data/events'
  * Helper to get the public URL for an image stored in Supabase Storage.
  * If the image path is already a full URL, it returns it as is.
  */
-export function getStorageUrl(path: string | null | undefined, bucket: string = 'images'): string {
+export function getStorageUrl(path: string | null | undefined, bucket: string = 'COO'): string {
     if (!path) return '';
     if (path.startsWith('http')) return path;
 
-    const { data } = supabase.storage.from(bucket).getPublicUrl(path);
+    // Strip leading bucket name from path if present
+    const cleanPath = path.replace(new RegExp(`^${bucket}/`), '');
+
+    const { data } = supabase.storage.from(bucket).getPublicUrl(cleanPath);
     return data.publicUrl;
 }
 

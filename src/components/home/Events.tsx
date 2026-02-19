@@ -3,15 +3,16 @@
 import React from "react";
 import { ArrowRight, Calendar, MapPin, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { events as mockEvents, Event } from "@/data/events";
+
 import Link from "next/link";
+import { Event, events } from "@/data/events";
 
 interface EventsProps {
     initialEvents?: Event[];
 }
 
 export function Events({ initialEvents }: EventsProps) {
-    const data = initialEvents && initialEvents.length > 0 ? initialEvents : mockEvents;
+    const data = initialEvents && initialEvents.length > 0 ? initialEvents : events;
     const featuredEvent = data[0];
 
     if (!featuredEvent) return null;
