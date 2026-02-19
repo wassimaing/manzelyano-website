@@ -90,7 +90,7 @@ export function About() {
                 >
                     <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-purple-900/40 z-10 group-hover:opacity-0 transition-opacity duration-500"></div>
                     <img
-                        src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=2649&auto=format&fit=crop"
+                        src="images/photo1.jpeg"
                         alt="Youth Activities"
                         className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-1000 ease-out"
                     />

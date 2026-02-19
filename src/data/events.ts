@@ -10,11 +10,10 @@ export interface Event {
     timeline: { time: string; activity: string }[];
     gallery: string[];
 }
-
 export const events: Event[] = [
     {
         id: "1",
-        title: "Summer Camp 2024",
+        title: "Summer ss 2024",
         date: "July 15, 2024",
         location: "Ain Draham",
         image: "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=2670&auto=format&fit=crop",
@@ -65,7 +64,7 @@ export const events: Event[] = [
     },
     {
         id: "3",
-        title: "Charity Gala Night",
+        title: "test",
         date: "August 15, 2024",
         location: "Menzel Bourguiba Hall",
         image: "https://images.unsplash.com/photo-1561489413-985b06da5bee?q=80&w=2670&auto=format&fit=crop",

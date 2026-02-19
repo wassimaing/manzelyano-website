@@ -5,8 +5,6 @@ import { ArrowRight, Calendar, Users, PartyPopper, Sparkles, Tent, MessagesSquar
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
-import { events } from "@/data/events";
-
 function Counter({ from, to }: { from: number; to: number }) {
     const count = useMotionValue(from);
     const rounded = useTransform(count, (latest) => Math.round(latest));
@@ -87,7 +85,12 @@ class TextScramble {
     }
 }
 
-export function Hero() {
+interface HeroProps {
+    initialEventsCount?: number;
+}
+
+export function Hero({ initialEventsCount }: HeroProps) {
+    const dataEventsCount = initialEventsCount ?? 4;
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const heroRef = useRef<HTMLElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
@@ -383,7 +386,7 @@ export function Hero() {
                             </div>
                             <div className="flex items-baseline gap-2">
                                 <span className="text-5xl font-display font-bold dark:text-white text-neutral-900 tracking-tighter">
-                                    <Counter from={0} to={events.length} />
+                                    <Counter from={0} to={dataEventsCount} />
                                 </span>
                                 <span className="text-[10px] text-pink-500 font-bold px-2 py-0.5 bg-pink-500/10 rounded-full">DONE</span>
                             </div>
@@ -458,9 +461,9 @@ export function Hero() {
                         style={{ transform: "translateZ(0px)" }}
                     >
                         <img
-                            src="/images/image.png"
-                            alt="Youth Group ManzelYano"
-                            className="w-full h-full object-cover opacity-30 dark:opacity-20 grayscale-[20%] scale-105"
+                            src="/images/photohero.png"
+                            alt="Youth Group Menzel Bourguiba"
+                            className="w-full h-full object-cover opacity-50 grayscale-[30%] scale-105"
                         />
                     </div>
                 </div>
