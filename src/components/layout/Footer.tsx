@@ -32,6 +32,7 @@ export function Footer() {
                                 <MapPin className="text-pink-500" size={16} /> Headquarters:
                             </p>
                             <p className="pl-6">
+                                École "les soeurs" menzel bourguiba,<br />
                                 5Q5V+F7H rue d'amour,<br />
                                 Rue Ibn Abi Dhief,<br />
                                 Manzil Bu Ruqaybah, Tunisia

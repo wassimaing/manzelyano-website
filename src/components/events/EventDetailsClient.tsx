@@ -7,7 +7,7 @@ import { Calendar, MapPin, Clock, ArrowLeft, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, formatEventDate, formatEventTime } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { Event } from "@/data/events";
 
@@ -17,6 +17,9 @@ interface EventDetailsClientProps {
 
 export function EventDetailsClient({ event }: EventDetailsClientProps) {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+    const displayDate = formatEventDate(event.startDate, event.endDate, event.date);
+    const displayTime = formatEventTime(event.timeline);
 
     return (
         <>
@@ -56,12 +59,19 @@ export function EventDetailsClient({ event }: EventDetailsClientProps) {
                         <div className="flex flex-col md:flex-row gap-6 text-neutral-300 text-lg">
                             <div className="flex items-center gap-2">
                                 <Calendar size={20} className="text-pink-500" />
-                                {event.date}
+                                {displayDate}
+                                {displayTime && ` • ${displayTime}`}
                             </div>
                             <div className="flex items-center gap-2">
                                 <MapPin size={20} className="text-purple-500" />
                                 {event.location}
                             </div>
+                            {event.durationDays && (
+                                <div className="flex items-center gap-2">
+                                    <Clock size={20} className="text-blue-500" />
+                                    {event.durationDays} {event.durationDays === 1 ? 'Day' : 'Days'}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -105,8 +115,12 @@ export function EventDetailsClient({ event }: EventDetailsClientProps) {
                                         <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
                                             <Clock size={18} className="text-pink-500" /> Date & Time
                                         </h4>
-                                        <p className="text-neutral-300">{event.date}</p>
-                                        <p className="text-neutral-500 text-sm mt-1">08:00 AM - 06:00 PM</p>
+                                        <p className="text-neutral-300 font-bold">{displayDate}</p>
+                                        {displayTime && (
+                                            <p className="text-neutral-400 font-medium mt-1">
+                                                {displayTime}
+                                            </p>
+                                        )}
                                     </div>
 
                                     <div className="p-6 bg-neutral-900/40 border border-white/5 rounded-2xl backdrop-blur-sm">

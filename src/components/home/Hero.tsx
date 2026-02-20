@@ -5,17 +5,10 @@ import { ArrowRight, Calendar, Users, PartyPopper, Sparkles, Tent, MessagesSquar
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
-function Counter({ from, to }: { from: number; to: number }) {
-    const count = useMotionValue(from);
-    const rounded = useTransform(count, (latest) => Math.round(latest));
+import { events as defaultEvents } from "@/data/events";
+import { StatCounter } from "../ui/StatCounter";
 
-    useEffect(() => {
-        const controls = animate(count, to, { duration: 2, ease: "easeOut" });
-        return controls.stop;
-    }, [to, count]);
-
-    return <motion.span>{rounded}</motion.span>;
-}
+// Removing local Counter as we now use the shared StatCounter
 
 class TextScramble {
     el: HTMLElement;
@@ -85,12 +78,13 @@ class TextScramble {
     }
 }
 
-interface HeroProps {
+export function Hero({
+    initialEventsCount = 0,
+    activeMembersCount = 120
+}: {
     initialEventsCount?: number;
-}
-
-export function Hero({ initialEventsCount }: HeroProps) {
-    const dataEventsCount = initialEventsCount ?? 4;
+    activeMembersCount?: number;
+}) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const heroRef = useRef<HTMLElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
@@ -367,7 +361,9 @@ export function Hero({ initialEventsCount }: HeroProps) {
                                 Community
                             </div>
                             <div className="flex items-baseline gap-2">
-                                <span className="text-3xl font-display font-bold dark:text-white text-neutral-900 tracking-tighter">120+</span>
+                                <span className="text-3xl font-display font-bold dark:text-white text-neutral-900 tracking-tighter">
+                                    <StatCounter to={activeMembersCount} suffix="+" />
+                                </span>
                                 <div className="flex items-center gap-1 text-[10px] text-green-400 font-bold bg-green-500/10 px-2 py-0.5 rounded-full">+15%</div>
                             </div>
                             <p className="text-[11px] dark:text-neutral-500 text-neutral-400 font-bold mt-1 uppercase tracking-wider">Active Members</p>
@@ -386,7 +382,7 @@ export function Hero({ initialEventsCount }: HeroProps) {
                             </div>
                             <div className="flex items-baseline gap-2">
                                 <span className="text-5xl font-display font-bold dark:text-white text-neutral-900 tracking-tighter">
-                                    <Counter from={0} to={dataEventsCount} />
+                                    <StatCounter to={initialEventsCount} />
                                 </span>
                                 <span className="text-[10px] text-pink-500 font-bold px-2 py-0.5 bg-pink-500/10 rounded-full">DONE</span>
                             </div>
@@ -461,9 +457,9 @@ export function Hero({ initialEventsCount }: HeroProps) {
                         style={{ transform: "translateZ(0px)" }}
                     >
                         <img
-                            src="/images/photohero.png"
-                            alt="Youth Group Menzel Bourguiba"
-                            className="w-full h-full object-cover opacity-50 grayscale-[30%] scale-105"
+                            src="/images/image.png"
+                            alt="Youth Group ManzelYano"
+                            className="w-full h-full object-cover opacity-30 dark:opacity-20 grayscale-[20%] scale-105"
                         />
                     </div>
                 </div>

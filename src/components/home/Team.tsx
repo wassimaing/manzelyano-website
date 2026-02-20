@@ -5,94 +5,10 @@ import { motion } from "framer-motion";
 import { Users, ChevronRight } from "lucide-react";
 import { Department } from "@/data/team";
 
-interface TeamProps {
-    initialDepartments?: Department[];
-}
-
-export function Team({ initialDepartments }: TeamProps) {
-    const data = initialDepartments && initialDepartments.length > 0 ? initialDepartments : [];
-    const coos = data.flatMap((dept) => dept.members);
-
-    return (
-        <section id="team" className="w-full max-w-[1200px] px-6 py-24 z-20 mx-auto">
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8 }}
-                className="flex flex-col items-center text-center mb-16"
-            >
-                <span className="text-sm font-mono text-purple-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-                    <Users size={16} /> Leadership
-                </span>
-                <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tight dark:text-white text-neutral-900 mb-6 uppercase">
-                    Our <span className="text-pink-500 glow-text-pink">Chief Operating Officers</span>
-                </h2>
-                <p className="dark:text-neutral-400 text-neutral-600 max-w-2xl mx-auto text-lg leading-relaxed">
-                    Meet the dedicated professionals leading our specialized departments and driving youth empowerment.
-                </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-                {coos.map((member, index) => (
-                    <div key={index} className="group relative">
-                        <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-purple-500/5 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="relative glass-panel p-6 rounded-[2rem] flex flex-col items-center text-center dark:hover:bg-white/5 hover:bg-neutral-100 transition-all duration-300 dark:border-white/5 border-neutral-200 border dark:hover:border-pink-500/30 hover:border-pink-500/30 overflow-hidden">
-                            <div className="w-24 h-24 rounded-full overflow-hidden mb-4 border-2 dark:border-white/10 border-neutral-200 group-hover:border-pink-500 transition-all duration-500 shadow-xl">
-                                <img
-                                    src={member.image}
-                                    alt={member.name}
-                                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                                />
-                            </div>
-                            <h4 className="dark:text-white text-neutral-900 font-bold text-lg mb-1 group-hover:text-pink-200 transition-colors uppercase tracking-tight line-clamp-1">
-                                {member.name}
-                            </h4>
-                            <span className="text-[10px] text-pink-400 font-mono font-bold tracking-widest uppercase py-1 px-3 bg-pink-500/10 rounded-full border border-pink-500/10">
-                                {member.role}
-                            </span>
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-            <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="flex justify-center mt-12"
-            >
-                <Link
-                    href="/about#departments"
-                    className="group relative px-8 py-4 dark:bg:white/5 bg-neutral-100 dark:hover:bg:white/10 hover:bg-neutral-200 border dark:border-white/10 border-neutral-200 hover:border-pink-500/30 rounded-2xl transition-all duration-300 backdrop-blur-md overflow-hidden"
-                >
-                    <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span className="relative flex items-center gap-2 dark:text-white text-neutral-900 font-bold uppercase tracking-widest text-sm">
-                        Explore Our Departments
-                        <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform text-pink-500" />
-                    </span>
-                </Link>
-            </motion.div>
-        </section>
-    );
-}
-"use client";
-
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { Users, ChevronRight } from "lucide-react";
-import { Department } from "@/data/team";
-
-
-interface TeamProps {
-    initialDepartments?: Department[];
-}
-
-export function Team({ initialDepartments }: TeamProps) {
-    const data = initialDepartments && initialDepartments.length > 0 ? initialDepartments : undefined
+export function Team({ initialDepartments = [] }: { initialDepartments?: Department[] }) {
+    const departments = initialDepartments;
     // Flatten all members into one list of Chief Operating Officers
-    const coos = data?.flatMap(dept => dept.members);
+    const coos = departments.flatMap((dept: Department) => dept.members);
 
     return (
         <section id="team" className="w-full max-w-[1200px] px-6 py-24 z-20 mx-auto">
@@ -114,7 +30,6 @@ export function Team({ initialDepartments }: TeamProps) {
                 </p>
             </motion.div>
 
-<<<<<<< HEAD
             <motion.div
                 initial="hidden"
                 whileInView="show"
@@ -128,69 +43,34 @@ export function Team({ initialDepartments }: TeamProps) {
                         }
                     }
                 }}
-                className="flex flex-col gap-12 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6 md:gap-y-12 mb-16"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16"
             >
-                {departments.map((dept) => (
-                    <div key={dept.id} className="grid grid-cols-2 gap-4 md:contents">
-                        {/* Department Label for Mobile */}
-                        <div className="col-span-2 md:hidden">
-                            <h3 className="text-[10px] font-mono text-pink-500 uppercase tracking-[0.3em] font-bold mb-2 flex items-center gap-2 px-2">
-                                <span className="w-4 h-[1px] bg-pink-500/50"></span>
-                                {dept.name}
-                            </h3>
-=======
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-                {coos?.map((member, index) => (
-                    <div
-                        key={index}
+                {coos.map((member: any) => (
+                    <motion.div
+                        key={member.name}
+                        variants={{
+                            hidden: { opacity: 0, scale: 0.9 },
+                            show: { opacity: 1, scale: 1, transition: { duration: 0.5 } }
+                        }}
                         className="group relative"
                     >
                         <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-purple-500/5 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div className="relative glass-panel p-6 rounded-[2rem] flex flex-col items-center text-center hover:bg-white/5 transition-all duration-300 border border-white/5 hover:border-pink-500/30 overflow-hidden">
-                            <div className="w-24 h-24 rounded-full overflow-hidden mb-4 border-2 border-white/10 group-hover:border-pink-500 transition-all duration-500 shadow-xl">
+                        <div className="relative glass-panel p-5 md:p-6 rounded-[2rem] flex flex-col items-center text-center dark:hover:bg-white/5 hover:bg-neutral-100 transition-all duration-300 dark:border-white/5 border-neutral-200 border dark:hover:border-pink-500/30 hover:border-pink-500/30 overflow-hidden h-full">
+                            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden mb-4 border-2 dark:border-white/10 border-neutral-200 group-hover:border-pink-500 transition-all duration-500 shadow-xl shrink-0">
                                 <img
                                     src={member.image}
                                     alt={member.name}
                                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                                 />
                             </div>
-                            <h4 className="text-white font-bold text-lg mb-1 group-hover:text-pink-200 transition-colors uppercase tracking-tight line-clamp-1">
+                            <h4 className="dark:text-white text-neutral-900 font-bold text-sm md:text-lg mb-1 group-hover:text-pink-200 transition-colors uppercase tracking-tight line-clamp-1">
                                 {member.name}
                             </h4>
-                            <span className="text-[10px] text-pink-400 font-mono font-bold tracking-widest uppercase py-1 px-3 bg-pink-500/10 rounded-full border border-pink-500/10">
+                            <span className="text-[8px] md:text-[10px] text-pink-400 font-mono font-bold tracking-widest uppercase py-1 px-3 bg-pink-500/10 rounded-full border border-pink-500/10 mt-auto">
                                 {member.role}
                             </span>
->>>>>>> feature/backend
                         </div>
-
-                        {dept.members.map((member) => (
-                            <motion.div
-                                key={member.name}
-                                variants={{
-                                    hidden: { opacity: 0, scale: 0.9 },
-                                    show: { opacity: 1, scale: 1, transition: { duration: 0.5 } }
-                                }}
-                                className="group relative"
-                            >
-                                <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-purple-500/5 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                <div className="relative glass-panel p-5 md:p-6 rounded-[2rem] flex flex-col items-center text-center dark:hover:bg-white/5 hover:bg-neutral-100 transition-all duration-300 dark:border-white/5 border-neutral-200 border dark:hover:border-pink-500/30 hover:border-pink-500/30 overflow-hidden h-full">
-                                    <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden mb-4 border-2 dark:border-white/10 border-neutral-200 group-hover:border-pink-500 transition-all duration-500 shadow-xl shrink-0">
-                                        <img
-                                            src={member.image}
-                                            alt={member.name}
-                                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                                        />
-                                    </div>
-                                    <h4 className="dark:text-white text-neutral-900 font-bold text-sm md:text-lg mb-1 group-hover:text-pink-200 transition-colors uppercase tracking-tight line-clamp-1">
-                                        {member.name}
-                                    </h4>
-                                    <span className="text-[8px] md:text-[10px] text-pink-400 font-mono font-bold tracking-widest uppercase py-1 px-3 bg-pink-500/10 rounded-full border border-pink-500/10 mt-auto">
-                                        {member.role}
-                                    </span>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
+                    </motion.div>
                 ))}
             </motion.div>
 

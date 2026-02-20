@@ -1,13 +1,14 @@
 import React from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { getDepartments, getTestimonials } from "@/lib/data";
+import { getDepartments, getTestimonials, getSiteStats } from "@/lib/data";
 import { AboutClient } from "@/components/about/AboutClient";
 
 export default async function AboutPage() {
-    const [departments, testimonials] = await Promise.all([
+    const [departments, testimonials, stats] = await Promise.all([
         getDepartments(),
         getTestimonials(),
+        getSiteStats(),
     ]);
 
     return (
@@ -16,6 +17,7 @@ export default async function AboutPage() {
             <AboutClient
                 initialDepartments={departments}
                 initialTestimonials={testimonials}
+                stats={stats}
             />
             <Footer />
         </>

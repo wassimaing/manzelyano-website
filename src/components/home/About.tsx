@@ -86,7 +86,7 @@ export function About() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="relative h-[500px] md:h-[650px] w-full rounded-3xl overflow-hidden glass-panel group"
+                    className="relative h-[300px] md:h-[650px] md:w-[700px] w-full rounded-3xl overflow-hidden glass-panel group"
                 >
                     <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-purple-900/40 z-10 group-hover:opacity-0 transition-opacity duration-500"></div>
                     <img
@@ -96,16 +96,16 @@ export function About() {
                     />
 
                     {/* Overlay Info */}
-                    <div className="absolute bottom-6 left-6 right-6 p-6 dark:bg-black/70 bg-white/70 backdrop-blur-xl dark:border-white/10 border-neutral-200 border rounded-2xl z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                        <div className="flex items-center gap-2 mb-3">
-                            <div className="w-2 h-2 rounded-full bg-pink-500 shadow-[0_0_10px_#ec4899]"></div>
-                            <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_10px_#9333ea]"></div>
-                            <div className="w-2 h-2 rounded-full dark:bg-white bg-neutral-900"></div>
+                    <div className="absolute bottom-3 left-3 right-3 md:bottom-6 md:left-6 md:right-6 p-3 md:p-6 dark:bg-black/70 bg-white/70 backdrop-blur-xl dark:border-white/10 border-neutral-200 border rounded-xl md:rounded-2xl z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <div className="flex items-center gap-1.5 md:gap-2 mb-2 md:mb-3">
+                            <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-pink-500 shadow-[0_0_10px_#ec4899]"></div>
+                            <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-purple-500 shadow-[0_0_10px_#9333ea]"></div>
+                            <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full dark:bg-white bg-neutral-900"></div>
                         </div>
-                        <p className="font-mono text-xs dark:text-pink-200 text-pink-700 leading-relaxed font-bold">
+                        <p className="font-mono text-[10px] md:text-xs dark:text-pink-200 text-pink-700 leading-relaxed font-bold">
                             &gt; project: education_for_all<br />
                             &gt; status: active<br />
-                            &gt; location: Rue Ibn Abi Dhief
+                            &gt; location: école "Les Soeurs" Menzel Bourguiba
                         </p>
                     </div>
                 </motion.div>
@@ -113,4 +113,3 @@ export function About() {
         </section>
     );
 }
-

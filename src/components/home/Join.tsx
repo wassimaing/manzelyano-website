@@ -1,13 +1,52 @@
 "use client";
 
 import React from "react";
-import { MessageCircle, Mail, Send } from "lucide-react";
-import { motion } from "framer-motion";
+import { MessageCircle, Mail, Send, CheckCircle2, RotateCcw } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { submitApplication } from "@/lib/actions";
+import { ResponsiveModal } from "@/components/admin/ResponsiveModal";
 
 export function Join() {
+    const [submitting, setSubmitting] = React.useState(false);
+    const [success, setSuccess] = React.useState(false);
+    const [formData, setFormData] = React.useState({
+        fullName: "",
+        dob: "",
+        institute: "",
+        email: "",
+        portfolio: "",
+        aboutMe: ""
+    });
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setSubmitting(true);
+        try {
+            const result = await submitApplication(formData);
+            if (result.success) {
+                setSuccess(true);
+                setFormData({
+                    fullName: "",
+                    dob: "",
+                    institute: "",
+                    email: "",
+                    portfolio: "",
+                    aboutMe: ""
+                });
+            } else {
+                alert(`Application Error: ${result.error || "Unknown error occurred."}`);
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Application failed. Please check your connection.");
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
     return (
         <section id="join" className="w-full max-w-[1200px] px-6 py-32 z-20 mx-auto">
             <motion.div
@@ -58,13 +97,16 @@ export function Join() {
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="md:w-1/2 dark:bg-black/60 bg-white/60 dark:border-white/10 border-neutral-200 border rounded-3xl p-6 md:p-10 backdrop-blur-xl shadow-2xl"
                     >
-                        <form className="space-y-5">
+                        <form className="space-y-5" onSubmit={handleSubmit}>
                             <div className="space-y-1.5">
                                 <label className="text-[10px] uppercase tracking-wider dark:text-neutral-400 text-neutral-500 font-bold ml-1">
                                     Full Name
                                 </label>
                                 <Input
+                                    required
                                     type="text"
+                                    value={formData.fullName}
+                                    onChange={e => setFormData({ ...formData, fullName: e.target.value })}
                                     placeholder="Enter your full name"
                                     className="dark:bg-white/5 bg-neutral-50 dark:border-white/10 border-neutral-200 dark:text-white text-neutral-900 dark:placeholder:text-neutral-600 placeholder:text-neutral-400 dark:focus-visible:bg-white/10 focus-visible:bg-neutral-100 focus-visible:ring-pink-500 text-sm py-6 rounded-xl"
                                 />
@@ -76,7 +118,10 @@ export function Join() {
                                         Date of Birth
                                     </label>
                                     <Input
+                                        required
                                         type="date"
+                                        value={formData.dob}
+                                        onChange={e => setFormData({ ...formData, dob: e.target.value })}
                                         className="dark:bg-white/5 bg-neutral-50 dark:border-white/10 border-neutral-200 dark:text-white text-neutral-900 dark:placeholder:text-neutral-600 placeholder:text-neutral-400 dark:focus-visible:bg-white/10 focus-visible:bg-neutral-100 focus-visible:ring-pink-500 text-sm py-6 rounded-xl"
                                     />
                                 </div>
@@ -85,7 +130,10 @@ export function Join() {
                                         Institute / University
                                     </label>
                                     <Input
+                                        required
                                         type="text"
+                                        value={formData.institute}
+                                        onChange={e => setFormData({ ...formData, institute: e.target.value })}
                                         placeholder="Where do you study?"
                                         className="dark:bg-white/5 bg-neutral-50 dark:border-white/10 border-neutral-200 dark:text-white text-neutral-900 dark:placeholder:text-neutral-600 placeholder:text-neutral-400 dark:focus-visible:bg-white/10 focus-visible:bg-neutral-100 focus-visible:ring-pink-500 text-sm py-6 rounded-xl"
                                     />
@@ -97,7 +145,10 @@ export function Join() {
                                     Email Address
                                 </label>
                                 <Input
+                                    required
                                     type="email"
+                                    value={formData.email}
+                                    onChange={e => setFormData({ ...formData, email: e.target.value })}
                                     placeholder="your@email.com"
                                     className="dark:bg-white/5 bg-neutral-50 dark:border-white/10 border-neutral-200 dark:text-white text-neutral-900 dark:placeholder:text-neutral-600 placeholder:text-neutral-400 dark:focus-visible:bg-white/10 focus-visible:bg-neutral-100 focus-visible:ring-pink-500 text-sm py-6 rounded-xl"
                                 />
@@ -109,6 +160,8 @@ export function Join() {
                                 </label>
                                 <Input
                                     type="text"
+                                    value={formData.portfolio}
+                                    onChange={e => setFormData({ ...formData, portfolio: e.target.value })}
                                     placeholder="Link to your work or profile"
                                     className="dark:bg-white/5 bg-neutral-50 dark:border-white/10 border-neutral-200 dark:text-white text-neutral-900 dark:placeholder:text-neutral-600 placeholder:text-neutral-400 dark:focus-visible:bg-white/10 focus-visible:bg-neutral-100 focus-visible:ring-pink-500 text-sm py-6 rounded-xl"
                                 />
@@ -119,20 +172,54 @@ export function Join() {
                                     Tell us about yourself
                                 </label>
                                 <Textarea
+                                    required
                                     rows={3}
+                                    value={formData.aboutMe}
+                                    onChange={e => setFormData({ ...formData, aboutMe: e.target.value })}
                                     placeholder="What motivates you to join Manzelyano?"
                                     className="dark:bg-white/5 bg-neutral-50 dark:border-white/10 border-neutral-200 dark:text-white text-neutral-900 dark:placeholder:text-neutral-600 placeholder:text-neutral-400 dark:focus-visible:bg-white/10 focus-visible:bg-neutral-100 focus-visible:ring-pink-500 text-sm rounded-xl"
                                 />
                             </div>
 
                             <Button
-                                type="button"
-                                className="w-full py-6 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white rounded-xl text-sm font-bold shadow-[0_0_25px_rgba(236,72,153,0.4)] mt-4 group"
+                                type="submit"
+                                disabled={submitting}
+                                className="w-full py-6 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white rounded-xl text-sm font-bold shadow-[0_0_25px_rgba(236,72,153,0.4)] mt-4 group disabled:opacity-50"
                             >
-                                Submit Application
-                                <Send className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+                                {submitting ? (
+                                    <>
+                                        Processing...
+                                        <RotateCcw className="ml-2 animate-spin" size={20} />
+                                    </>
+                                ) : (
+                                    <>
+                                        Submit Application
+                                        <Send className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+                                    </>
+                                )}
                             </Button>
                         </form>
+
+                        {/* Success Modal */}
+                        <ResponsiveModal isOpen={success} setIsOpen={setSuccess} title="Application Sent!" maxWidth="max-w-md">
+                            <div className="p-10 text-center space-y-6">
+                                <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center text-green-500 mx-auto animate-bounce">
+                                    <CheckCircle2 size={48} />
+                                </div>
+                                <div className="space-y-2">
+                                    <h3 className="text-2xl font-bold text-foreground">Success!</h3>
+                                    <p className="text-muted-foreground leading-relaxed">
+                                        Your application has been sent successfully to the club. We'll review it and get back to you soon!
+                                    </p>
+                                </div>
+                                <Button
+                                    onClick={() => setSuccess(false)}
+                                    className="w-full py-6 bg-foreground text-background font-bold rounded-xl"
+                                >
+                                    Awesome
+                                </Button>
+                            </div>
+                        </ResponsiveModal>
                     </motion.div>
                 </div>
             </motion.div>

@@ -1,12 +1,15 @@
 export interface Event {
     id: string;
     title: string;
-    date: string;
+    date: string; // Kept for display/compatibility
+    startDate: string;
+    endDate: string;
     location: string;
     image: string;
     category: "Community" | "Social" | "Sports" | "Education" | "Workshop";
     color: "pink" | "purple" | "blue" | "yellow";
     overview: string;
+    durationDays?: number;
     timeline: { time: string; activity: string }[];
     gallery: string[];
 }
@@ -14,7 +17,9 @@ export const events: Event[] = [
     {
         id: "1",
         title: "Summer ss 2024",
-        date: "July 15, 2024",
+        date: "FROM July 15 TO July 20, 2024",
+        startDate: "2024-07-15",
+        endDate: "2024-07-20",
         location: "Ain Draham",
         image: "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=2670&auto=format&fit=crop",
         category: "Social",
@@ -42,6 +47,8 @@ export const events: Event[] = [
         id: "2",
         title: "Beach Cleanup Drive",
         date: "August 02, 2024",
+        startDate: "2024-08-02",
+        endDate: "2024-08-02",
         location: "Bizerte Corniche",
         image: "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?q=80&w=2670&auto=format&fit=crop",
         category: "Community",
@@ -66,6 +73,8 @@ export const events: Event[] = [
         id: "3",
         title: "test",
         date: "August 15, 2024",
+        startDate: "2024-08-15",
+        endDate: "2024-08-15",
         location: "Menzel Bourguiba Hall",
         image: "https://images.unsplash.com/photo-1561489413-985b06da5bee?q=80&w=2670&auto=format&fit=crop",
         category: "Social",
@@ -90,6 +99,8 @@ export const events: Event[] = [
         id: "4",
         title: "Youth Football Cup",
         date: "September 01, 2024",
+        startDate: "2024-09-01",
+        endDate: "2024-09-01",
         location: "City Stadium",
         image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=2936&auto=format&fit=crop",
         category: "Sports",

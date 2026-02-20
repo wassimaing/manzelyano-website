@@ -8,9 +8,9 @@ import { EventDetailsClient } from "@/components/events/EventDetailsClient";
 export default async function EventDetailsPage({
     params,
 }: {
-    params: { id: string };
+    params: Promise<{ id: string }>;
 }) {
-    const { id } = params;
+    const { id } = await params;
     const event = await getEventById(id);
 
     if (!event) {
