@@ -46,6 +46,27 @@ interface AboutClientProps {
 export function AboutClient({ initialDepartments, initialTestimonials, stats }: AboutClientProps) {
     const [selectedDept, setSelectedDept] = React.useState<Department | null>(null);
     const [selectedMember, setSelectedMember] = React.useState<TeamMember | null>(null);
+    const [isMobile, setIsMobile] = React.useState(false);
+
+    // Track screen size for responsive animations
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 640);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    // Disable scrolling when modal is open
+    React.useEffect(() => {
+        if (selectedDept || selectedMember) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [selectedDept, selectedMember]);
 
     const yearsOfImpact = new Date().getFullYear() - 2019;
 
@@ -206,7 +227,7 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
                 {/* Chief Operating Officers Modal */}
                 <AnimatePresence>
                     {selectedDept && (
-                        <div className="fixed inset-0 z-[80] flex items-center justify-center p-6 sm:p-10 pointer-events-auto">
+                        <div className={`fixed inset-0 z-[80] flex ${isMobile ? 'items-end' : 'items-center'} justify-center p-0 sm:p-10 pointer-events-auto`}>
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
@@ -215,10 +236,11 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
                                 onClick={() => setSelectedDept(null)}
                             />
                             <motion.div
-                                initial={{ scale: 0.9, opacity: 0, y: 30 }}
-                                animate={{ scale: 1, opacity: 1, y: 0 }}
-                                exit={{ scale: 0.9, opacity: 0, y: 30 }}
-                                className="relative max-w-4xl w-full bg-card border border-border rounded-[2.5rem] overflow-hidden shadow-2xl z-10 p-8 md:p-12 overflow-y-auto max-h-[90vh]"
+                                initial={isMobile ? { y: "100%" } : { scale: 0.9, opacity: 0, y: 30 }}
+                                animate={isMobile ? { y: 0 } : { scale: 1, opacity: 1, y: 0 }}
+                                exit={isMobile ? { y: "100%" } : { scale: 0.9, opacity: 0, y: 30 }}
+                                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                                className={`relative max-w-4xl w-full bg-card border-x border-t sm:border border-border ${isMobile ? 'rounded-t-[2.5rem] rounded-b-none' : 'rounded-[2.5rem]'} overflow-hidden shadow-2xl z-10 p-8 md:p-12 overflow-y-auto ${isMobile ? 'max-h-[85vh]' : 'max-h-[90vh]'}`}
                             >
                                 <button
                                     onClick={() => setSelectedDept(null)}
@@ -267,7 +289,7 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
             {/* Member Details Modal */}
             <AnimatePresence>
                 {selectedMember && (
-                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 sm:p-10 pointer-events-auto">
+                    <div className={`fixed inset-0 z-[100] flex ${isMobile ? 'items-end' : 'items-center'} justify-center p-0 sm:p-10 pointer-events-auto`}>
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -276,10 +298,11 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
                             onClick={() => setSelectedMember(null)}
                         />
                         <motion.div
-                            initial={{ scale: 0.9, opacity: 0, y: 30 }}
-                            animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 0.9, opacity: 0, y: 30 }}
-                            className="relative max-w-xl w-full bg-card/90 rounded-[2rem] overflow-hidden border border-border shadow-[0_0_80px_rgba(0,0,0,0.1)] z-10 flex flex-col backdrop-blur-md"
+                            initial={isMobile ? { y: "100%" } : { scale: 0.9, opacity: 0, y: 30 }}
+                            animate={isMobile ? { y: 0 } : { scale: 1, opacity: 1, y: 0 }}
+                            exit={isMobile ? { y: "100%" } : { scale: 0.9, opacity: 0, y: 30 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                            className={`relative max-w-xl w-full bg-card/90 ${isMobile ? 'rounded-t-[2rem] rounded-b-none border-x border-t' : 'rounded-[2rem] border'} overflow-hidden border-border shadow-[0_0_80px_rgba(0,0,0,0.1)] z-10 flex flex-col backdrop-blur-md ${isMobile ? 'max-h-[90vh] overflow-y-auto' : ''}`}
                         >
                             <button
                                 onClick={() => setSelectedMember(null)}
