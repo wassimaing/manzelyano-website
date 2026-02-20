@@ -30,6 +30,7 @@ export function Team({ initialDepartments = [] }: { initialDepartments?: Departm
                 </p>
             </motion.div>
 
+            {/* Desktop View: Flattened Grid */}
             <motion.div
                 initial="hidden"
                 whileInView="show"
@@ -43,7 +44,7 @@ export function Team({ initialDepartments = [] }: { initialDepartments?: Departm
                         }
                     }
                 }}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16"
+                className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16"
             >
                 {coos.map((member: any) => (
                     <motion.div
@@ -73,6 +74,55 @@ export function Team({ initialDepartments = [] }: { initialDepartments?: Departm
                     </motion.div>
                 ))}
             </motion.div>
+
+            {/* Mobile View: Categorized by Department */}
+            <div className="flex flex-col gap-12 sm:hidden mb-16">
+                {departments.map((dept: Department) => (
+                    <div key={dept.id} className="space-y-6">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="flex items-center gap-3 border-b dark:border-white/5 border-neutral-200 pb-2"
+                        >
+                            <span className="w-2 h-2 rounded-full bg-pink-500 glow-pink"></span>
+                            <h3 className="text-sm font-mono text-pink-500 font-bold uppercase tracking-[0.2em]">
+                                {dept.name}
+                            </h3>
+                        </motion.div>
+
+                        <div className="grid grid-cols-1 gap-6">
+                            {dept.members.map((member: any) => (
+                                <motion.div
+                                    key={member.name}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    className="group relative"
+                                >
+                                    <div className="relative glass-panel p-5 rounded-[2rem] flex items-center gap-6 dark:hover:bg-white/5 hover:bg-neutral-100 transition-all duration-300 dark:border-white/5 border-neutral-200 border">
+                                        <div className="w-16 h-16 rounded-full overflow-hidden border-2 dark:border-white/10 border-neutral-200 shrink-0">
+                                            <img
+                                                src={member.image}
+                                                alt={member.name}
+                                                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                                            />
+                                        </div>
+                                        <div className="flex flex-col text-left">
+                                            <h4 className="dark:text-white text-neutral-900 font-bold text-base mb-1 uppercase tracking-tight">
+                                                {member.name}
+                                            </h4>
+                                            <span className="text-[9px] text-pink-400 font-mono font-bold tracking-widest uppercase py-1 px-3 bg-pink-500/10 rounded-full border border-pink-500/10 w-fit">
+                                                {member.role}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
 
             <motion.div
                 initial={{ opacity: 0, y: 10 }}

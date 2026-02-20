@@ -211,7 +211,7 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
-                                className="absolute inset-0 bg-black/90 backdrop-blur-md"
+                                className="absolute inset-0 bg-background/90 backdrop-blur-md"
                                 onClick={() => setSelectedDept(null)}
                             />
                             <motion.div
@@ -222,7 +222,7 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
                             >
                                 <button
                                     onClick={() => setSelectedDept(null)}
-                                    className="absolute top-6 right-6 p-2 bg-white/5 hover:bg-white/10 text-white rounded-full backdrop-blur-md z-20 transition-all border border-white/5"
+                                    className="absolute top-6 right-6 p-2 bg-muted/50 hover:bg-muted text-foreground rounded-full backdrop-blur-md z-20 transition-all border border-border"
                                 >
                                     <X size={24} />
                                 </button>
@@ -244,9 +244,9 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
                                             animate={{ opacity: 1, scale: 1 }}
                                             transition={{ delay: index * 0.1 }}
                                             onClick={() => setSelectedMember(member)}
-                                            className="group glass-panel p-6 rounded-3xl flex flex-col items-center text-center hover:bg-white/5 transition-all cursor-pointer border border-white/5 hover:border-pink-500/30"
+                                            className="group glass-panel p-6 rounded-3xl flex flex-col items-center text-center hover:bg-muted/50 transition-all cursor-pointer border border-border hover:border-pink-500/30"
                                         >
-                                            <div className="w-24 h-24 rounded-full overflow-hidden mb-4 border-2 border-white/10 group-hover:border-pink-500 transition-colors shadow-lg">
+                                            <div className="w-24 h-24 rounded-full overflow-hidden mb-4 border-2 border-border group-hover:border-pink-500 transition-colors shadow-lg">
                                                 <img
                                                     src={member.image}
                                                     alt={member.name}
@@ -272,7 +272,7 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="absolute inset-0 bg-black/95 backdrop-blur-xl"
+                            className="absolute inset-0 bg-background/95 backdrop-blur-xl"
                             onClick={() => setSelectedMember(null)}
                         />
                         <motion.div
@@ -283,7 +283,7 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
                         >
                             <button
                                 onClick={() => setSelectedMember(null)}
-                                className="absolute top-6 right-6 p-2 bg-black/40 hover:bg-white/10 text-white rounded-full backdrop-blur-md z-30 transition-all border border-white/10"
+                                className="absolute top-6 right-6 p-2 bg-muted/40 hover:bg-muted text-foreground rounded-full backdrop-blur-md z-30 transition-all border border-border"
                             >
                                 <X size={20} />
                             </button>
@@ -318,16 +318,16 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
 
                             {/* Content Section - Testimonials Style */}
                             <div className="p-8 md:p-10 relative">
-                                <Quote className="absolute top-8 right-8 text-white/5" size={60} />
+                                <Quote className="absolute top-8 right-8 text-foreground/5" size={60} />
 
                                 <div className="space-y-8 relative z-10">
                                     <div>
-                                        <p className="text-neutral-300 leading-relaxed italic text-lg md:text-xl">
+                                        <p className="text-muted-foreground leading-relaxed italic text-lg md:text-xl">
                                             "{selectedMember.experience}"
                                         </p>
                                     </div>
 
-                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pt-6 border-t border-white/5">
+                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pt-6 border-t border-border">
                                         <div className="flex items-center gap-3">
                                             <div className="p-3 rounded-xl bg-pink-500/10 text-pink-500 border border-pink-500/20">
                                                 <Mail size={18} />
@@ -356,7 +356,7 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
             </AnimatePresence>
 
             {/* Testimonials Marquee Section */}
-            <section className="py-32 bg-black relative overflow-hidden">
+            <section className="py-32 bg-background relative overflow-hidden">
                 <div className="container mx-auto px-6 relative z-10 mb-16 text-center">
                     <span className="text-pink-500 font-mono text-sm tracking-widest uppercase mb-4 block">Feedback</span>
                     <h2 className="text-4xl md:text-6xl font-display font-bold text-foreground mb-6">What our family says</h2>
@@ -364,8 +364,8 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
 
                 <div className="relative w-full overflow-hidden group">
                     {/* Gradient Masks */}
-                    <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none"></div>
-                    <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none"></div>
+                    <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-background to-transparent z-20 pointer-events-none"></div>
+                    <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-background to-transparent z-20 pointer-events-none"></div>
 
                     <div className="flex gap-6 animate-marquee hover:[animation-play-state:paused] w-max px-4">
                         {[...initialTestimonials, ...initialTestimonials].map((item, index) => (
@@ -373,10 +373,10 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
                                 key={index}
                                 className="w-[300px] md:w-[400px] bg-card/50 border border-border rounded-[2rem] p-8 backdrop-blur-sm hover:bg-card/80 transition-colors shrink-0 flex flex-col relative"
                             >
-                                <Quote className="absolute top-6 right-6 text-white/5" size={40} />
+                                <Quote className="absolute top-6 right-6 text-foreground/5" size={40} />
 
                                 <div className="flex items-center gap-4 mb-6">
-                                    <div className="w-12 h-12 rounded-full overflow-hidden border border-white/10">
+                                    <div className="w-12 h-12 rounded-full overflow-hidden border border-border">
                                         <img
                                             src={item.image}
                                             alt={item.name}
@@ -437,20 +437,40 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
                             href="https://www.tiktok.com/@manzelyan0?_r=1&_t=ZS-9450Lgka4sj"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group p-10 rounded-[2.5rem] bg-muted/5 border border-border hover:bg-muted/10 transition-all flex flex-col items-center gap-6"
+                            className="group p-10 rounded-[2.5rem] bg-[#ff0050]/10 border border-[#ff0050]/20 hover:border-[#00f2ea]/40 transition-all flex flex-col items-center gap-6"
                         >
-                            <div className="p-6 bg-foreground rounded-[1.5rem] text-background shadow-[0_0_30px_rgba(255,255,255,0.1)] group-hover:scale-110 transition-transform relative overflow-hidden">
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#ff0050]/20 to-[#00f2ea]/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <div className="p-6 bg-[#010101] rounded-[1.5rem] text-white shadow-[0_0_30px_rgba(255,0,80,0.3)] group-hover:shadow-[0_0_30px_rgba(0,242,234,0.3)] group-hover:scale-110 transition-all relative overflow-hidden">
+                                {/* TikTok cyan shadow layer */}
                                 <svg
                                     viewBox="0 0 24 24"
-                                    fill="currentColor"
+                                    fill="#00f2ea"
+                                    className="w-10 h-10 absolute top-[calc(50%-20px+2px)] left-[calc(50%-20px-2px)]"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.03 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-1.13-.31-2.34-.25-3.41.33-.71.38-1.27 1.03-1.51 1.81-.26.78-.17 1.69.21 2.39.42.83 1.22 1.44 2.12 1.61.93.18 1.91-.01 2.69-.54.78-.54 1.24-1.44 1.3-2.39.06-2.85.03-5.7.03-8.55V0z" />
+                                </svg>
+                                {/* TikTok red shadow layer */}
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="#ff0050"
+                                    className="w-10 h-10 absolute top-[calc(50%-20px-2px)] left-[calc(50%-20px+2px)]"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.03 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-1.13-.31-2.34-.25-3.41.33-.71.38-1.27 1.03-1.51 1.81-.26.78-.17 1.69.21 2.39.42.83 1.22 1.44 2.12 1.61.93.18 1.91-.01 2.69-.54.78-.54 1.24-1.44 1.3-2.39.06-2.85.03-5.7.03-8.55V0z" />
+                                </svg>
+                                {/* Main white icon on top */}
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="white"
                                     className="w-10 h-10 relative z-10"
                                     xmlns="http://www.w3.org/2000/svg"
                                 >
                                     <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.03 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-1.13-.31-2.34-.25-3.41.33-.71.38-1.27 1.03-1.51 1.81-.26.78-.17 1.69.21 2.39.42.83 1.22 1.44 2.12 1.61.93.18 1.91-.01 2.69-.54.78-.54 1.24-1.44 1.3-2.39.06-2.85.03-5.7.03-8.55V0z" />
                                 </svg>
                             </div>
-                            <span className="text-foreground font-bold text-xl tracking-widest group-hover:text-[#00f2ea] transition-colors uppercase">TikTok</span>
+                            <span className="text-foreground font-bold text-xl tracking-widest group-hover:text-[#ff0050] transition-colors uppercase">TikTok</span>
                         </a>
                     </div>
                 </div>

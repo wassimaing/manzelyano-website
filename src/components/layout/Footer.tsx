@@ -35,7 +35,7 @@ export function Footer() {
                                 École "les soeurs" menzel bourguiba,<br />
                                 5Q5V+F7H rue d'amour,<br />
                                 Rue Ibn Abi Dhief,<br />
-                                Manzil Bu Ruqaybah, Tunisia
+                                Menzel Bourguiba, Tunisia
                             </p>
                         </div>
                     </div>
@@ -123,7 +123,9 @@ export function Footer() {
 
                             <li>
                                 <a
-                                    href="mailto:contact@manzelyano.tn"
+                                    href="https://mail.google.com/mail/?view=cm&to=manzelyanoboscoyouth@gmail.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="flex items-center gap-2 text-sm dark:text-neutral-400 text-neutral-500 dark:hover:text-white hover:text-neutral-900 transition-colors"
                                 >
                                     <Mail size={16} className="dark:text-white text-neutral-900" /> Email
