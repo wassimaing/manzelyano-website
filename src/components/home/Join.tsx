@@ -82,7 +82,11 @@ export function Join() {
                                     className="px-8 py-6 rounded-full font-bold text-sm dark:bg-white dark:text-black bg-neutral-900 text-white dark:hover:bg-pink-100 hover:bg-neutral-800 dark:shadow-[0_0_20px_rgba(255,255,255,0.2)] shadow-lg"
                                     asChild
                                 >
-                                    <a href="mailto:contact@manzelyano.tn">
+                                    <a
+                                        href="https://mail.google.com/mail/?view=cm&to=manzelyanoboscoyouth@gmail.com"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
                                         <Mail className="mr-2" size={20} /> Email Us
                                     </a>
                                 </Button>

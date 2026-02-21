@@ -89,7 +89,7 @@ export function Footer() {
                         <ul className="space-y-4">
                             <li>
                                 <a
-                                    href="#"
+                                    href="https://www.facebook.com/profile.php?id=61572948599465"
                                     className="flex items-center gap-2 text-sm dark:text-neutral-400 text-neutral-500 dark:hover:text-white hover:text-neutral-900 transition-colors"
                                 >
                                     <Facebook size={16} /> Facebook
@@ -97,7 +97,7 @@ export function Footer() {
                             </li>
                             <li>
                                 <a
-                                    href="#"
+                                    href="https://www.instagram.com/manzelyano.bosco.youth?igsh=MXcyaDRmb2xzaGZ3YQ%3D%3D&utm_source=qr"
                                     className="flex items-center gap-2 text-sm dark:text-neutral-400 text-neutral-500 dark:hover:text-white hover:text-neutral-900 transition-colors"
                                 >
                                     <Instagram size={16} /> Instagram
@@ -106,7 +106,7 @@ export function Footer() {
 
                             <li>
                                 <a
-                                    href="#"
+                                    href="https://www.tiktok.com/@manzelyan0?_r=1&_t=ZS-9450Lgka4sj"
                                     className="flex items-center gap-2 text-sm dark:text-neutral-400 text-neutral-500 dark:hover:text-white hover:text-neutral-900 transition-colors group"
                                 >
                                     <svg

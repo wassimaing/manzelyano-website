@@ -46,6 +46,7 @@ interface AboutClientProps {
 export function AboutClient({ initialDepartments, initialTestimonials, stats }: AboutClientProps) {
     const [selectedDept, setSelectedDept] = React.useState<Department | null>(null);
     const [selectedMember, setSelectedMember] = React.useState<TeamMember | null>(null);
+    const [selectedTestimonial, setSelectedTestimonial] = React.useState<Testimonial | null>(null);
     const [isMobile, setIsMobile] = React.useState(false);
 
     // Track screen size for responsive animations
@@ -58,7 +59,7 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
 
     // Disable scrolling when modal is open
     React.useEffect(() => {
-        if (selectedDept || selectedMember) {
+        if (selectedDept || selectedMember || selectedTestimonial) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'unset';
@@ -66,7 +67,7 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
         return () => {
             document.body.style.overflow = 'unset';
         };
-    }, [selectedDept, selectedMember]);
+    }, [selectedDept, selectedMember, selectedTestimonial]);
 
     const yearsOfImpact = new Date().getFullYear() - 2019;
 
@@ -390,38 +391,96 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
                     <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-background to-transparent z-20 pointer-events-none"></div>
                     <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-background to-transparent z-20 pointer-events-none"></div>
 
-                    <div className="flex gap-6 animate-marquee hover:[animation-play-state:paused] w-max px-4">
-                        {[...initialTestimonials, ...initialTestimonials].map((item, index) => (
-                            <div
-                                key={index}
-                                className="w-[300px] md:w-[400px] bg-card/50 border border-border rounded-[2rem] p-8 backdrop-blur-sm hover:bg-card/80 transition-colors shrink-0 flex flex-col relative"
-                            >
-                                <Quote className="absolute top-6 right-6 text-foreground/5" size={40} />
+                    <div className="w-full overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth py-4 cursor-grab active:cursor-grabbing">
+                        <div className="flex gap-6 animate-marquee-reverse hover:[animation-play-state:paused] w-max px-4">
+                            {[...initialTestimonials, ...initialTestimonials, ...initialTestimonials, ...initialTestimonials].map((item, index) => (
+                                <div
+                                    key={index}
+                                    onClick={() => setSelectedTestimonial(item)}
+                                    className="w-[300px] md:w-[400px] bg-card/50 border border-border rounded-[2rem] p-8 backdrop-blur-sm hover:bg-card/80 transition-all shrink-0 flex flex-col relative snap-center cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+                                >
+                                    <Quote className="absolute top-6 right-6 text-foreground/5" size={40} />
 
-                                <div className="flex items-center gap-4 mb-6">
-                                    <div className="w-12 h-12 rounded-full overflow-hidden border border-border">
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <div className="w-12 h-12 rounded-full overflow-hidden border border-border">
+                                            <img
+                                                src={item.image}
+                                                alt={item.name}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
+                                        <div>
+                                            <h4 className="text-foreground font-bold text-lg">{item.name}</h4>
+                                            <span className="text-pink-400 text-xs font-mono uppercase tracking-wider">
+                                                {item.role}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <p className="text-muted-foreground leading-relaxed italic text-sm line-clamp-4">
+                                        "{item.text}"
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Testimonial Detailed View Modal */}
+            <AnimatePresence>
+                {selectedTestimonial && (
+                    <div className={`fixed inset-0 z-[100] flex ${isMobile ? 'items-end' : 'items-center'} justify-center p-0 sm:p-10 pointer-events-auto`}>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="absolute inset-0 bg-background/95 backdrop-blur-xl"
+                            onClick={() => setSelectedTestimonial(null)}
+                        />
+                        <motion.div
+                            initial={isMobile ? { y: "100%" } : { scale: 0.9, opacity: 0, y: 30 }}
+                            animate={isMobile ? { y: 0 } : { scale: 1, opacity: 1, y: 0 }}
+                            exit={isMobile ? { y: "100%" } : { scale: 0.9, opacity: 0, y: 30 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                            className={`relative max-w-xl w-full bg-card/90 ${isMobile ? 'rounded-t-[2rem] rounded-b-none border-x border-t' : 'rounded-[3rem] border'} overflow-hidden border-border shadow-2xl z-10 flex flex-col backdrop-blur-md ${isMobile ? 'max-h-[80vh] overflow-y-auto' : ''}`}
+                        >
+                            <button
+                                onClick={() => setSelectedTestimonial(null)}
+                                className="absolute top-6 right-6 p-2 bg-muted/40 hover:bg-muted text-foreground rounded-full backdrop-blur-md z-30 transition-all border border-border"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+
+                            <div className="p-8 md:p-12 relative">
+                                <Quote className="absolute top-10 right-10 text-foreground/5" size={80} />
+
+                                <div className="flex items-center gap-6 mb-10 relative z-10">
+                                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-pink-500/20 shadow-xl">
                                         <img
-                                            src={item.image}
-                                            alt={item.name}
+                                            src={selectedTestimonial.image}
+                                            alt={selectedTestimonial.name}
                                             className="w-full h-full object-cover"
                                         />
                                     </div>
                                     <div>
-                                        <h4 className="text-foreground font-bold text-lg">{item.name}</h4>
-                                        <span className="text-pink-400 text-xs font-mono uppercase tracking-wider">
-                                            {item.role}
+                                        <h3 className="text-2xl font-bold text-foreground mb-1">{selectedTestimonial.name}</h3>
+                                        <span className="text-pink-500 font-mono text-xs uppercase tracking-[0.2em] font-bold">
+                                            {selectedTestimonial.role}
                                         </span>
                                     </div>
                                 </div>
 
-                                <p className="text-muted-foreground leading-relaxed italic text-sm">
-                                    "{item.text}"
-                                </p>
+                                <div className="relative z-10">
+                                    <p className="text-foreground/90 text-lg md:text-xl leading-relaxed italic font-medium">
+                                        "{selectedTestimonial.text}"
+                                    </p>
+                                </div>
                             </div>
-                        ))}
+                        </motion.div>
                     </div>
-                </div>
-            </section>
+                )}
+            </AnimatePresence>
 
             {/* Social Media Section */}
             <section className="container mx-auto px-6 py-40 text-center relative z-10">
