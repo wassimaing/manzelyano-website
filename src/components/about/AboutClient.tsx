@@ -152,7 +152,7 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
                         <div className="grid grid-cols-2 gap-8 pt-4">
                             <div>
                                 <h4 className="text-foreground font-bold text-3xl mb-1">
-                                    <StatCounter to={yearsOfImpact} suffix="+" />
+                                    {yearsOfImpact}+
                                 </h4>
                                 <p className="text-muted-foreground text-sm uppercase tracking-wider">Years of Impact</p>
                             </div>
@@ -165,10 +165,10 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
                         </div>
                     </motion.div>
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1.0, scale: 1.1 }}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="relative aspect-square lg:aspect-video rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl"
+                        className="relative aspect-[4/3] sm:aspect-square lg:aspect-video rounded-[2rem] sm:rounded-[3rem] overflow-hidden border border-border shadow-2xl"
                     >
                         <img
                             src="images/about.jpeg"
@@ -176,8 +176,8 @@ export function AboutClient({ initialDepartments, initialTestimonials, stats }: 
                             className="w-full h-full object-cover opacity-60"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
-                        <div className="absolute bottom-10 left-10">
-                            <span className="text-foreground font-bold text-lg">Since 2019.</span>
+                        <div className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10">
+                            <span className="text-foreground font-bold text-base sm:text-lg">Since 2019.</span>
                         </div>
                     </motion.div>
                 </div>
