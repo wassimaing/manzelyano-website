@@ -188,7 +188,7 @@ export default function JoinPage() {
                                     />
                                 </div>
 
-                                <div className="grid grid-cols-2 gap-4 sm:gap-8">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
                                     <div className="space-y-2.5">
                                         <label className="text-[11px] uppercase tracking-[0.2em] text-neutral-500 font-bold ml-1">
                                             Date of Birth
